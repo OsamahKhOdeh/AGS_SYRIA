@@ -1,0 +1,33 @@
+.case-footer-view{
+    margin: 1rem auto;
+    justify-content: space-between;
+    background: transparent;
+    .form-control{
+        border: 1px solid #111;
+    }
+    .form-control:focus{
+        box-shadow: none;
+    }
+}
+.card{
+    width: 70% !important;
+}
+.card-add-case{
+    width: 50% !important;
+}
+@media(max-width: 768px) {
+    .card{
+        width: 92% !important;
+    }
+    .card-add-case{
+        width: 92% !important;
+    }
+    }
+@media(max-width: 576px) {
+    .card{
+        width: 92% !important;
+    }
+    .card-add-case{
+        width: 92% !important;
+    }
+}
