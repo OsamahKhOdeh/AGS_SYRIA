@@ -12,6 +12,7 @@ export const Cases = () => {
   const [currentCase, setCurrentCase] = useState();
   const [filePOE, setFilePOE] = useState();
   const [fileAS, setFileAS] = useState();
+  const [fileInv, setFileInv] = useState();
   const [allCases, setAllCases] = useState([]);
   const [bufferAllCases, setBufferAllCases] = useState([]);
   const [query, setQuery] = useState("");
@@ -55,6 +56,18 @@ export const Cases = () => {
   const handleFileASChange = (e) => {
     if (e.target.files[0]) {
       setFileAS(e.target.files[0]);
+      // console.log(fileAS);
+      // setFileAS(e.target.files[0]);
+      // let index = updatedFiles.findIndex(el => el.type === FileType.AS)
+      // index != -1 ?  updatedFiles[index].file = fileAS :  setFilePOE({fileType : FileType.AS,file:e.target.files[0]})
+    } else {
+      showToastMessage("Select Only PDF File,  Try Again", ToastType.Warning);
+    }
+  };
+  // handler File INV
+  const handleFileInvChange = (e) => {
+    if (e.target.files[0]) {
+      setFileInv(e.target.files[0]);
       // console.log(fileAS);
       // setFileAS(e.target.files[0]);
       // let index = updatedFiles.findIndex(el => el.type === FileType.AS)
@@ -197,7 +210,7 @@ export const Cases = () => {
               allCases.map((item, index) => (
                 <div className="case-grid">
                   <div className="case-grid-tittle">
-                    <h5>{item.caseName}</h5>
+                    <h6>{item.caseName}</h6>
                     <span>{formateDate(item.caseDate)}</span>
                   </div>
                   <div className="files-cases">
@@ -245,6 +258,21 @@ export const Cases = () => {
                         <i class="far fa-file-pdf"></i>
                       )}
                       <strong>CR</strong>
+                    </div>
+                    <div className="file-case">
+                      {item.files.findIndex(
+                        (f) => f.type === ArchiveFileType.INVOICE
+                      ) != -1 ? (
+                        <i
+                          class="fas fa-file-pdf"
+                          onClick={() => {
+                            openPdfFile(item.caseName, ArchiveFileType.INVOICE);
+                          }}
+                        ></i>
+                      ) : (
+                        <i class="far fa-file-pdf"></i>
+                      )}
+                      <strong>INV</strong>
                     </div>
                   </div>
                   <div
@@ -322,15 +350,17 @@ export const Cases = () => {
                       accept="application/pdf"
                       onChange={handleFilePklChange}
                     />
-                    <label htmlFor="file_pkl" className="case-grid-footer">
-                      <span>Select</span>
-                    </label>
-                    <label
-                      className="case-grid-footer"
-                      onClick={() => UploadFile(ArchiveFileType.PKL, filePKL)}
-                    >
-                      <span>Upload</span>
-                    </label>
+                    <div className="upload-select">
+                      <label htmlFor="file_pkl" className="case-grid-footer">
+                        <span>Select</span>
+                      </label>
+                      <label
+                        className="case-grid-footer"
+                        onClick={() => UploadFile(ArchiveFileType.PKL, filePKL)}
+                      >
+                        <span>Upload</span>
+                      </label>
+                    </div>
                   </div>
                   <div className="case-grid">
                     {/* <span className='btn-delete'><i class="uil uil-trash-alt"></i></span> */}
@@ -362,15 +392,19 @@ export const Cases = () => {
                       accept="application/pdf"
                       onChange={handleFilePOEChange}
                     />
-                    <label htmlFor="file_poe" className="case-grid-footer">
-                      <span>Select</span>
-                    </label>
-                    <label
-                      className="case-grid-footer"
-                      onClick={() => UploadFile(ArchiveFileType.BEOE, filePOE)}
-                    >
-                      <span>Upload</span>
-                    </label>
+                    <div className="upload-select">
+                      <label htmlFor="file_poe" className="case-grid-footer">
+                        <span>Select</span>
+                      </label>
+                      <label
+                        className="case-grid-footer"
+                        onClick={() =>
+                          UploadFile(ArchiveFileType.BEOE, filePOE)
+                        }
+                      >
+                        <span>Upload</span>
+                      </label>
+                    </div>
                   </div>
                   <div className="case-grid">
                     {/* <span className='btn-delete'><i class="uil uil-trash-alt"></i></span> */}
@@ -392,7 +426,6 @@ export const Cases = () => {
                           <i class="far fa-file-pdf"></i>
                         )}
                         {/* <i class="far fa-file-pdf"></i> */}
-
                         <strong>CR</strong>
                       </div>
                     </div>
@@ -403,15 +436,60 @@ export const Cases = () => {
                       accept="application/pdf"
                       onChange={handleFileASChange}
                     />
-                    <label htmlFor="file_as" className="case-grid-footer">
-                      <span>Select</span>
-                    </label>
-                    <label
-                      className="case-grid-footer"
-                      onClick={() => UploadFile(ArchiveFileType.AS, fileAS)}
-                    >
-                      <span>Upload</span>
-                    </label>
+                    <div className="upload-select">
+                      <label htmlFor="file_as" className="case-grid-footer">
+                        <span>Select</span>
+                      </label>
+                      <label
+                        className="case-grid-footer"
+                        onClick={() => UploadFile(ArchiveFileType.AS, fileAS)}
+                      >
+                        <span>Upload</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="case-grid">
+                    <div className="files-cases">
+                      <div className="file-case">
+                        {currentCase.files.findIndex(
+                          (f) => f.type === ArchiveFileType.INVOICE
+                        ) != -1 ? (
+                          <i
+                            class="fas fa-file-pdf"
+                            onClick={() => {
+                              openPdfFile(
+                                currentCase.caseName,
+                                ArchiveFileType.INVOICE
+                              );
+                            }}
+                          ></i>
+                        ) : (
+                          <i class="far fa-file-pdf"></i>
+                        )}
+                        {/* <i class="far fa-file-pdf"></i> */}
+                        <strong>INV</strong>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="file_inv"
+                      className="d-none"
+                      accept="application/pdf"
+                      onChange={handleFileInvChange}
+                    />
+                    <div className="upload-select">
+                      <label htmlFor="file_inv" className="case-grid-footer">
+                        <span>Select</span>
+                      </label>
+                      <label
+                        className="case-grid-footer"
+                        onClick={() =>
+                          UploadFile(ArchiveFileType.INVOICE, fileInv)
+                        }
+                      >
+                        <span>Upload</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>

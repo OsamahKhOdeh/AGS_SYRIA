@@ -450,6 +450,10 @@
   }
 }
 
+.success {
+  color: var(--green) !important
+}
+
 .upload-file {
   padding: 10px;
   text-align: center;
@@ -543,6 +547,18 @@
     button {
       padding: 3px 10px;
       margin: 5px;
+    }
+
+
+  }
+
+  .upload-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    label {
+      width: 100%;
     }
   }
 }

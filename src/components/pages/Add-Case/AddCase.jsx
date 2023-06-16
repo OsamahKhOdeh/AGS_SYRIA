@@ -10,6 +10,8 @@ import axios from "axios";
 export const AddCase = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [caseName, setCaseName] = useState("");
+  const [pklNumber, setPklNumber] = useState("");
+  const [invNumber, setInvNumber] = useState("");
   // this is for upload file
   const [file, setFile] = useState();
   const handleFileChange = (e) => {
@@ -32,11 +34,12 @@ export const AddCase = () => {
   const handleAddCase = () => {
     // console.log(file);
     const formData = new FormData();
-    formData.append("caseName", caseName);
+    formData.append("caseName", `PKL_${pklNumber}_INV_${invNumber}`);
     formData.append("fileType", ArchiveFileType.PKL);
     formData.append("caseDate", startDate);
     formData.append("logisticEmployee", "osama");
     formData.append("file", file);
+
     axios
       .post(`${BASE_URL}/archive`, formData)
       .then((response) => {
@@ -59,52 +62,92 @@ export const AddCase = () => {
         </div>
         <div className="card-body">
           <form>
-            <div className="form-group">
-              <label htmlFor="case_id">
-                Case Name <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                id="case_id"
-                value={caseName}
-                onChange={(event) => setCaseName(event.target.value)}
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="date_id">Case Date</label>
-              {/* <input type="date" id='date_id' className='form-control' /> */}
-              <DatePicker
-                selected={startDate}
-                value={startDate}
-                className="form-control"
-                onChange={(date) => setStartDate(date)}
-              />
-            </div>
-            <div className="form-group upload-file">
-              <div className="upload-file-info">
-                <span>
-                  <i class="uil uil-upload uil-extra-larg"></i>
-                </span>
-                <span className="btn-upload" htmlFor="pkl_id">
-                  Select
-                </span>
-                <label htmlFor="pkl_id">Select packing list PDF</label>
+            <div className="row">
+              <div className="col-lg-6 col-sm-12">
+                <div className="form-group">
+                  <label htmlFor="case_id">
+                    PKL Number <span className="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="case_id"
+                    value={pklNumber}
+                    onChange={(event) => setPklNumber(event.target.value)}
+                    className="form-control"
+                  />
+                </div>
               </div>
-              <input
-                type="file"
-                id="pkl_id"
-                accept="application/pdf"
-                onChange={handleFileChange}
-                className="form-control"
-              />
+              <div className="col-lg-6 col-sm-12">
+                <div className="form-group">
+                  <label htmlFor="case_id">
+                    INV Number <span className="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="case_id"
+                    value={invNumber}
+                    onChange={(event) => setInvNumber(event.target.value)}
+                    className="form-control"
+                  />
+                </div>
+              </div>
+              <div className="col-lg-6 col-sm-12">
+                <div className="form-group">
+                  <label htmlFor="date_id">Case Date</label>
+                  {/* <input type="date" id='date_id' className='form-control' /> */}
+                  <DatePicker
+                    selected={startDate}
+                    value={startDate}
+                    className="form-control"
+                    onChange={(date) => setStartDate(date)}
+                  />
+                  {!file && (
+                    <div className="no-files">
+                      <strong>
+                        <i class="uil uil-folder-open"></i>
+                      </strong>
+                      <span>No Packing list Added Yet!</span>
+                    </div>
+                  )}
+                  {file && (
+                    <div className="no-files">
+                      <strong>
+                        <i class="uil uil--open"></i>
+                      </strong>
+                      <span className="file-name success">
+                        <i class="uil uil-folder-check "></i>{" "}
+                        {file && `${file.name}`}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-6 col-sm-12">
+                <div className="form-group upload-file">
+                  <div className="upload-file-info">
+                    <span>
+                      <i class="uil uil-upload uil-extra-larg"></i>
+                    </span>
+                    <span className="btn-upload" htmlFor="pkl_id">
+                      Select
+                    </span>
+                    <label htmlFor="pkl_id">Select packing list PDF</label>
+                  </div>
+                  <input
+                    type="file"
+                    id="pkl_id"
+                    accept="application/pdf"
+                    onChange={handleFileChange}
+                    className="form-control"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="text-center">{file && `${file.name}`}</div>
             <div className="btn-add-case">
               <button
                 type="button"
                 className="shark-btn-main"
-                disabled={!file || caseName === ""}
+                disabled={!file || invNumber === "" || pklNumber === ""}
                 onClick={handleAddCase}
               >
                 Add

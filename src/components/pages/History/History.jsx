@@ -107,7 +107,7 @@ export const History = () => {
               allCases.map((item, index) => (
                 <div className="case-grid">
                   <div className="case-grid-tittle">
-                    <h5>{item.caseName}</h5>
+                    <h7>{item.caseName}</h7>
                     <span>{formateDate(item.caseDate)}</span>
                   </div>
                   <div className="files-cases">
@@ -156,6 +156,21 @@ export const History = () => {
                       )}
                       <strong>CR</strong>
                     </div>
+                    {/* <div className="file-case">
+                      {item.files.findIndex(
+                        (f) => f.type === ArchiveFileType.INVOICE
+                      ) != -1 ? (
+                        <i
+                          class="fas fa-file-pdf"
+                          onClick={() => {
+                            openPdfFile(item.caseName, ArchiveFileType.INVOICE);
+                          }}
+                        ></i>
+                      ) : (
+                        <i class="far fa-file-pdf"></i>
+                      )}
+                      <strong>INV</strong>
+                    </div> */}
                   </div>
                   <div className="case-footer-view">
                     <h5>INV No</h5>

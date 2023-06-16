@@ -12,11 +12,8 @@ export const UnderProcess = () => {
   const [bufferAllCases, setBufferAllCases] = useState([]);
   const [query, setQuery] = useState("");
   const [refresh, setRefresh] = useState(false);
-  const [currentCase, setCurrentCase] = useState();
-  //    const handleAddInvoiceNumber = () =>{
-  //       console.log({ inoviceNumber: inoviceNumber.current.value })
-  //       showToastMessage("Invoice Number Added Successfuly",ToastType.Success)
-  //   }
+  const [fileInvoice, setFileInvoice] = useState();
+
   useEffect(() => {
     const getAllCases = async () => {
       await axios
@@ -54,7 +51,25 @@ export const UnderProcess = () => {
         console.error(err);
       });
   };
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      setFileInvoice(e.target.files[0]);
+    }
+    console.log(e.target.files[0]);
+  };
   const handleInvoiceNumber = (item) => {
+    // let model = {
+    //   invoiceNumber: inoviceNumber.current.value,
+    //   acountingEmployee: "Husam",
+    //   file
+    // };
+    const formData = new FormData();
+    formData.append("invoiceNumber", inoviceNumber.current.value);
+    formData.append("caseName", item.caseName);
+    // formData.append("fileType", ArchiveFileType.INVOICE);
+    formData.append("acountingEmployee", "Husam");
+    // formData.append("file", fileInvoice);
+    console.log(formData);
     let model = {
       invoiceNumber: inoviceNumber.current.value,
       acountingEmployee: "Husam",
@@ -67,7 +82,6 @@ export const UnderProcess = () => {
         showToastMessage("Inovice Number Added Successfuly", ToastType.Success);
       })
       .catch((error) => {
-        // Handle any errors
         console.error(error);
       });
   };
@@ -113,7 +127,7 @@ export const UnderProcess = () => {
             {allCases.map((item, index) => (
               <div className="case-grid">
                 <div className="case-grid-tittle">
-                  <h5>{item.caseName}</h5>
+                  <h6>{item.caseName}</h6>
                   <span>{formateDate(item.caseDate)}</span>
                 </div>
                 <div className="files-cases">
@@ -123,6 +137,7 @@ export const UnderProcess = () => {
                     ) != -1 ? (
                       <i
                         class="fas fa-file-pdf"
+                        htmlFor="inv_file"
                         onClick={() => {
                           openPdfFile(item.caseName, ArchiveFileType.PKL);
                         }}
@@ -133,21 +148,25 @@ export const UnderProcess = () => {
                     <strong>Packing List</strong>
                   </div>
                   {/* <div className="file-case">
-                    {item.files.findIndex(
-                      (f) => f.type === ArchiveFileType.BEOE
-                    ) != -1 ? (
-                      <i
-                        class="fas fa-file-pdf"
-                        onClick={() => {
-                          openPdfFile(item.caseName, ArchiveFileType.BEOE);
-                        }}
-                      ></i>
-                    ) : (
-                      <i class="far fa-file-pdf"></i>
-                    )}
-                    <strong>Beo</strong>
-                  </div>
-                  <div className="file-case">
+                    <label htmlFor="inv_file">
+                      {!setFileInvoice ? (
+                        <i class="fas fa-file-pdf"></i>
+                      ) : (
+                        <i class="far fa-file-pdf"></i>
+                      )}
+                    </label>
+                    <input
+                      type="file"
+                      className="d-none"
+                      accept="application/pdf"
+                      id="inv_file"
+                      onClick={(e) => {
+                        handleFileChange(e);
+                      }}
+                    />
+                    <strong>Invoice</strong>
+                  </div> */}
+                  {/* <div className="file-case">
                     {item.files.findIndex(
                       (f) => f.type === ArchiveFileType.AS
                     ) != -1 ? (
