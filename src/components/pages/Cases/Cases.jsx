@@ -176,7 +176,6 @@ export const Cases = () => {
   return (
     <>
       <ToastContainer />
-      {/* <button onClick={() => openPdfFile('https://pdfjs-express.s3-us-west-2.amazonaws.com/docs/choosing-a-pdf-viewer.pdf')}>MYDPF</button> */}
       <div className="card">
         <div className="card-tittle">
           <h5>All Cases </h5>
