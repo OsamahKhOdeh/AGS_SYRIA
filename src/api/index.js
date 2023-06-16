@@ -7,12 +7,3 @@ const API = axios.create({ baseURL: BASE_URL });
 
 export const login = ({ username, password }) =>
   API.post("/auth", { username, password });
-
-export const fetchUsersApi = () => API.get("/users");
-
-export const updateUser = (id, { ...updatedUser }) =>
-  API.patch(`/users/${id}`, updatedUser);
-
-export const createUser = (newUser) => API.post("/users", newUser);
-
-export const deleteUser = (id) => API.delete(`/users/${id}`);
