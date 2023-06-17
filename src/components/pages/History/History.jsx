@@ -156,7 +156,7 @@ export const History = () => {
                       )}
                       <strong>CR</strong>
                     </div>
-                    {/* <div className="file-case">
+                    <div className="file-case">
                       {item.files.findIndex(
                         (f) => f.type === ArchiveFileType.INVOICE
                       ) != -1 ? (
@@ -170,7 +170,7 @@ export const History = () => {
                         <i class="far fa-file-pdf"></i>
                       )}
                       <strong>INV</strong>
-                    </div> */}
+                    </div>
                   </div>
                   <div className="case-footer-view">
                     <h5>INV No</h5>

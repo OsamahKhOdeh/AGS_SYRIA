@@ -557,7 +557,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 
-    label {
+    label,
+    button {
       width: 100%;
     }
   }

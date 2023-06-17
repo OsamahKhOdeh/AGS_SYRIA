@@ -196,14 +196,21 @@ export const UnderProcess = () => {
                     />
                   </span>
                 </div>
-                <div
-                  className="case-grid-footer"
-                  onClick={() => {
-                    handleInvoiceNumber(item);
-                  }}
-                >
-                  <span>Done</span>
-                </div>
+                {inoviceNumber != "" && (
+                  <div
+                    className="case-grid-footer"
+                    onClick={() => {
+                      handleInvoiceNumber(item);
+                    }}
+                  >
+                    <span disabled={inoviceNumber === ""}>Done</span>
+                  </div>
+                )}
+                {inoviceNumber === "" && (
+                  <div className="case-grid-footer">
+                    <span disabled={inoviceNumber === ""}>Done</span>
+                  </div>
+                )}
               </div>
             ))}
             {/* <div className="case-grid">

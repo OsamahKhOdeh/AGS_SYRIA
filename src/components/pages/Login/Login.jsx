@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
 import { ToastContainer } from "react-toastify";
 export const Login = () => {
+  const [isHidden, setIsHidden] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const psswd = useRef();
@@ -46,6 +47,7 @@ export const Login = () => {
         username: usernameD.current.value,
         password: psswdD.current.value,
       };
+      console.log(formData);
       // console.log({ username: username, psswd: psswd });
       dispatch(login(formData, navigate));
     } catch (error) {}
@@ -66,6 +68,12 @@ export const Login = () => {
   //       console.error(error);
   //     });
   // };
+  const handleKeyDown = (e) => {
+    if (e.code === "Enter") {
+      handleSubmitD();
+      return;
+    }
+  };
   return (
     <>
       <ToastContainer />;{/* // New Page to login  */}
@@ -75,12 +83,32 @@ export const Login = () => {
             <form>
               <h1>Login </h1>
               <br />
-              <input type="text" placeholder="User Name" ref={usernameD} />
+              <input
+                type="text"
+                placeholder="User Name"
+                ref={usernameD}
+                autoComplete="on"
+              />
               <div className="form-group">
-                <input type="password" placeholder="Password" ref={psswdD} />
+                <input
+                  type={`${isHidden ? "password" : "text"}`}
+                  placeholder="Password"
+                  ref={psswdD}
+                  autoComplete="on"
+                  onKeyDown={handleKeyDown}
+                />
+                {!isHidden && (
+                  <i class="uil uil-eye" onClick={() => setIsHidden(true)}></i>
+                )}
+                {isHidden && (
+                  <i
+                    class="uil uil-eye-slash"
+                    onClick={() => setIsHidden(false)}
+                  ></i>
+                )}
               </div>
               <button type="button" onClick={handleSubmitD}>
-                Login{" "}
+                Login
               </button>
             </form>
           </div>
@@ -111,11 +139,20 @@ export const Login = () => {
             />
             <div className="form-group">
               <input
-                type="password"
+                type={`${isHidden ? "password" : "text"}`}
                 placeholder="Password"
                 ref={psswd}
                 autocomplete="on"
               />
+              {!isHidden && (
+                <i class="uil uil-eye" onClick={() => setIsHidden(true)}></i>
+              )}
+              {isHidden && (
+                <i
+                  class="uil uil-eye-slash"
+                  onClick={() => setIsHidden(false)}
+                ></i>
+              )}
             </div>
             <button type="button" onClick={handleSubmit}>
               Login{" "}

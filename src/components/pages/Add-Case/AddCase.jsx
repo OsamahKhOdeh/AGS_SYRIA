@@ -9,7 +9,7 @@ import { BASE_URL } from "../../../config/Config";
 import axios from "axios";
 export const AddCase = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const [caseName, setCaseName] = useState("");
+  // const [caseName, setCaseName] = useState("");
   const [pklNumber, setPklNumber] = useState("");
   const [invNumber, setInvNumber] = useState("");
   // this is for upload file
@@ -27,7 +27,8 @@ export const AddCase = () => {
 
   const resetFrom = () => {
     setStartDate(new Date());
-    setCaseName("");
+    setPklNumber("");
+    setInvNumber("");
     setFile(null);
   };
   //

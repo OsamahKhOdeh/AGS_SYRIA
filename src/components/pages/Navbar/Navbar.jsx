@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Roles } from "../Enum/Constants";
 import useAuth from "../../../hooks/useAuth";
@@ -9,10 +9,27 @@ export const Navbar = () => {
     localStorage.clear();
     navigate("/");
   };
+  const redirectRoute = () => {
+    if (roles.includes(Roles.Admin)) {
+      navigate("/history");
+    } else if (roles.includes(Roles.Logistic)) {
+      navigate("/add-case");
+    } else if (roles.includes(Roles.Archiver)) {
+      navigate("/cases");
+    } else if (roles.includes(Roles.Accounter)) {
+      navigate("/under-process");
+    }
+  };
   return (
     <>
       <div className="shark-navbar">
-        <img src="./images/logo2.png" className="logo-img" alt="logo-img" />
+        <div
+          onClick={() => {
+            redirectRoute();
+          }}
+        >
+          <img src="./images/logo2.png" className="logo-img" alt="logo-img" />
+        </div>
         {/* <h4>Al Sharak</h4> */}
         <div className="menus-items">
           <button
