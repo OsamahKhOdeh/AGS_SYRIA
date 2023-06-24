@@ -12,7 +12,6 @@ export const login = (formData, navigate) => async (dispatch) => {
     dispatch(setCredentials(data));
     dispatch(setAutherized(true));
     const roles = useAuth().roles;
-    // console.log(roles, Roles.Logistic);
     if (roles.includes(Roles.Logistic)) {
       navigate("/add-case");
     } else if (roles.includes(Roles.Accounter)) {
@@ -20,19 +19,17 @@ export const login = (formData, navigate) => async (dispatch) => {
     } else if (roles.includes(Roles.Archiver)) {
       navigate("/cases");
     } else if (roles.includes(Roles.Admin)) {
-      navigate("/history");
+      navigate("/admin/makepo");
+    } else {
+      navigate("/admin/makepo");
     }
     showToastMessage("Logging in Successfully", ToastType.Success);
     // router.push('/');
   } catch (error) {
-    console.log(error);
     if (error.request.status === 401) {
       showToastMessage("Error in user name or password", ToastType.Erorr);
     } else if (error.request.status === 429) {
-      showToastMessage(
-        "Too many attempts , Please try aftar 5 Minutes",
-        ToastType.Erorr
-      );
+      showToastMessage("Too many attempts , Please try aftar 5 Minutes", ToastType.Erorr);
     }
     dispatch(setAutherized(false));
   }

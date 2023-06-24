@@ -3,6 +3,7 @@ export const Roles = {
   Archiver: "Archive",
   Accounter: "Accounting",
   Admin: "Admin",
+  SyriaSales: "SyriaSales",
 };
 export const CaseStatus = {
   DRAFT: "DRAFT",

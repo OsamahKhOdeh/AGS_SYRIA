@@ -11,7 +11,7 @@ export const Navbar = () => {
   };
   const redirectRoute = () => {
     if (roles.includes(Roles.Admin)) {
-      navigate("/history");
+      navigate("/admin/makepo");
     } else if (roles.includes(Roles.Logistic)) {
       navigate("/add-case");
     } else if (roles.includes(Roles.Archiver)) {
@@ -28,7 +28,8 @@ export const Navbar = () => {
             redirectRoute();
           }}
         >
-          <img src="./images/logo2.png" className="logo-img" alt="logo-img" />
+          {/* <img src="./logo1.jpg" className="logo-img" alt="logo-img" /> */}
+          <h3 className="mb-0">Alshark Inc</h3>
         </div>
         {/* <h4>Al Sharak</h4> */}
         <div className="menus-items">

@@ -14,6 +14,11 @@ import { UnderProcess } from "./components/pages/Under-Process/UnderProcess";
 import RequireAuth from "./actions/RequireAuth";
 // import axios from "axios";
 import { Roles } from "./components/pages/Enum/Constants";
+import LayoutAdmin from "./components/pages/LayoutAdmin/LayoutAdmin";
+import ProductsStepper from "./components/pages/LayoutAdmin/Products/ProductsStepper";
+import EditStock2 from "./components/pages/EditStock/EditStock2";
+import Orders from "./components/pages/LayoutAdmin/Orders/Orders";
+import EditItems from "./components/pages/LayoutAdmin/EditItems/EditItems";
 // import { useEffect } from "react";
 // import { loading } from "./actions";
 // import { connect, useDispatch, useSelector } from "react-redux";
@@ -102,6 +107,18 @@ function App() {
                       path="/under-process"
                       element={<UnderProcess />}
                     ></Route>
+                  </Route>
+                  <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
+                    <Route path="/admin" element={<LayoutAdmin />}>
+                      <Route
+                        index
+                        path="makepo"
+                        element={<ProductsStepper />}
+                      ></Route>
+                      <Route path="editstock" element={<EditStock2 />}></Route>
+                      <Route path="orders" element={<Orders />}></Route>
+                      <Route path="editItems" element={<EditItems />}></Route>
+                    </Route>
                   </Route>
                 </Route>
               </Route>
