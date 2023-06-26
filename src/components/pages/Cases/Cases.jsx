@@ -165,7 +165,7 @@ export const Cases = () => {
   useEffect(() => {
     const getAllCases = async () => {
       await axios
-        .get(`${BASE_URL}/archive/${CaseStatus.DRAFT}`)
+        .get(`${BASE_URL}/archive/${CaseStatus.Draft_Progress}`)
         .then(async (response) => {
           setAllCases(response.data);
           setBufferAllCases(response.data);

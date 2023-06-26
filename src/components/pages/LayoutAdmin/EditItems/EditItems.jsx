@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { setFiltersState } from "../../../../store/filtersSlice";
 import SearchBox from "../../SearchBox/SearchBox";
 import { getFilteredProducts, getProducts } from "../../../../actions/products";
+import useAuth from "../../../../hooks/useAuth";
 
 let choosenCompanies = [];
 let choosenBrands = [];
@@ -29,7 +30,7 @@ function useQuery() {
 
 const AdminPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
-
+  const {roles,username} = useAuth()
   const handleSearchBoxChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -229,7 +230,7 @@ const AdminPage = () => {
   };
 
   return (
-    <div style={{ width: "100%" }}>
+    <div   style={{ width: "100%" }}>
       <Grow in sx={{ width: "100%" }}>
         <Container maxWidth="xl">
           {showFilters && (

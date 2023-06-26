@@ -119,7 +119,7 @@ export default function ProductsStepper() {
 
                 <div className="text-center btn-orders">
                 <span className="ags-btn-sucess-fill">
-                <Link to="/admin/orders"> Orders</Link>
+                <Link to="/user/orders"> Orders</Link>
                 </span>
                 </div>
               </div>

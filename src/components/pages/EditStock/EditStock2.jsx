@@ -583,7 +583,7 @@ const EditStock2 = () => {
     <div style={{ width: "98%", margin: "auto" }}>
       <div className="search_container">
             <div className="search__list">
-                <div className="change__">
+                <div className="change__ Edit-stock" >
                   <div className="row">
                     <div className="col-lg-6 col-md-12">
                   

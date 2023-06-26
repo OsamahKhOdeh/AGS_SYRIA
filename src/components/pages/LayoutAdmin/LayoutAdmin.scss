@@ -207,6 +207,7 @@
   margin-bottom: 1rem;
   border-radius: 6px;
   text-align: left;
+  width: 98%;
   .card-add-product-tittle {
     text-align: center;
     background-color: var(--black);
@@ -260,7 +261,7 @@
 .pi__table {
   text-align: center;
   vertical-align: baseline;
-  width: 99%;
+  width: 98% !important;
   text-align: left;
   thead {
     tr {
@@ -327,12 +328,14 @@
     .status-table-label {
       display: flex;
       align-items: center;
+      justify-content: center;
       padding: 10px 3px;
       margin: 5px;
       border-radius: 5px;
       background: transparent;
       font-weight: 700;
       font-size: 18px;
+      text-align: center;
     }
     .table-btn-pdf {
       span {
@@ -348,16 +351,19 @@
       color: #04174d;
       text-align: left;
       font-weight: 600;
+      text-align: center;
     }
     .customer_cell {
       font-family: sans-serif;
       color: #04174d;
       text-align: left;
       font-weight: 600;
+      text-align: center;
     }
     .buttons-pls {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+      background-color: transparent;
     }
   }
   tfoot {
@@ -370,7 +376,7 @@
   }
 }
 .pi-list {
-  display: none;
+  display: blcok;
 }
 .summary-info {
   margin: 1rem auto;
@@ -412,6 +418,7 @@
     border-radius: 7px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     margin: 0.6rem auto;
+    display: none;
     .item-pi-tittle {
       display: flex;
       justify-content: space-between;
@@ -585,12 +592,49 @@
   width: 98%;
   margin: auto;
 }
+.search_container {
+  display: flex;
+  .row {
+    display: contents;
+  }
+  div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+.Edit-stock {
+  .row {
+    display: flex;
+  }
+}
 @media (max-width: 768px) {
   .sidenav {
     padding-top: 15px;
   }
   .sidenav a {
     font-size: 18px;
+  }
+  .change__ {
+    display: block;
+    .side_filters {
+      justify-content: space-between;
+      margin: 0.6rem auto;
+      .radio-toolbar input[type="radio"]:checked + label,
+      .radio-toolbar input[type="radio"]:not(checked) + label {
+        font-size: 0.6rem;
+        margin: 0 3px;
+      }
+    }
+  }
+  .pi__table {
+    display: none;
+  }
+  .pi-list {
+    display: block;
+    .item-pi {
+      display: block;
+    }
   }
 }
 @media (max-width: 576px) {
@@ -611,6 +655,9 @@
   }
   .pi-list {
     display: block;
+    .item-pi {
+      display: block;
+    }
   }
 }
 @media screen and (max-height: 450px) {

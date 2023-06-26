@@ -14,6 +14,8 @@ import { deleteProduct, updateProductPrices, uploadDatasheet } from "../../../..
 import { addProducttocart, deletProductformCart } from "../../../../../../store/cartSlice";
 import { deleteProductState } from "../../../../../../store/productsSlice";
 import Modal from "react-bootstrap/Modal";
+import { Roles } from "../../../../Enum/Constants";
+import useAuth from "../../../../../../hooks/useAuth";
 const Product = ({ product, index }) => {
   const currency = useSelector((state) => state.filters.currency);
 
@@ -58,7 +60,7 @@ const Product = ({ product, index }) => {
   };
 
   const [isUploading, setIsUploading] = useState(false);
-
+  const {roles,username} = useAuth()
   const classes = useStyles();
 
   const handleUpload = async () => {
@@ -284,6 +286,7 @@ const Product = ({ product, index }) => {
               </div>
             </div>
             <div>
+              {roles.includes(Roles.Admin)  && (
                 <div class="input-group input-group-sm ">
                   <div class="input-group-prepend">
                     <small class="input-group-text" id="inputGroup-sizing-sm">Net  Price</small>
@@ -299,11 +302,12 @@ const Product = ({ product, index }) => {
                     // });
                   }} aria-label="Small" aria-describedby="inputGroup-sizing-sm"/>
                 </div>
+              )}
                   <div class="input-group input-group-sm ">
                   <div class="input-group-prepend">
                     <small  class="input-group-text" id="inputGroup-sizing-sm">Retail Price</small>
                   </div>
-                  <input type="text" class="form-control" value={retailPrice} onChange={(e) => {
+                  <input type="text" class="form-control" disabled={!roles.includes(Roles.Admin)} value={retailPrice} onChange={(e) => {
                   setRetailPrice(e.target.value);
                     // setStateProduct({
                     //   ...stateProduct,
@@ -316,9 +320,9 @@ const Product = ({ product, index }) => {
                 </div>
                   <div class="input-group input-group-sm ">
                   <div class="input-group-prepend">
-                    <small class="input-group-text" id="inputGroup-sizing-sm">WholeSale</small>
+                    <small class="input-group-text" id="inputGroup-sizing-sm">Wholesale</small>
                   </div>
-                  <input type="text" class="form-control" value={wholesalePrice} onChange={(e) => {
+                  <input type="text" class="form-control" value={wholesalePrice} disabled={!roles.includes(Roles.Admin)} onChange={(e) => {
                     setWholesalePrice(e.target.value);
                     // setStateProduct({
                     //   ...stateProduct,

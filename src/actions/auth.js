@@ -12,16 +12,15 @@ export const login = (formData, navigate) => async (dispatch) => {
     dispatch(setCredentials(data));
     dispatch(setAutherized(true));
     const roles = useAuth().roles;
+    console.log("roles", roles);
     if (roles.includes(Roles.Logistic)) {
       navigate("/add-case");
     } else if (roles.includes(Roles.Accounter)) {
       navigate("/under-process");
     } else if (roles.includes(Roles.Archiver)) {
       navigate("/cases");
-    } else if (roles.includes(Roles.Admin)) {
-      navigate("/admin/makepo");
     } else {
-      navigate("/admin/makepo");
+      navigate("/user/makepo");
     }
     showToastMessage("Logging in Successfully", ToastType.Success);
     // router.push('/');

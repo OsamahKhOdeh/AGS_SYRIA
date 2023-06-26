@@ -1,8 +1,9 @@
 import axios from "axios";
 // export const BASE_URL = "https://wibxc.xyz/api";
 // export const BASE_URL = "http://10.255.254.16:5000";
+// export const BASE_URL_DUBAI = "http://143.42.61.215:5000";
 export const BASE_URL_DUBAI = "http://143.42.61.215:5000";
-export const BASE_URL = "http://10.255.254.16:5000";
+export const BASE_URL = "https://wibxc.xyz/api";
 const API = axios.create({ baseURL: BASE_URL });
 const API1 = axios.create({ baseURL: BASE_URL_DUBAI });
 // const API = axios.create({ baseURL: BASE_URL_DUBAI });
@@ -42,7 +43,7 @@ export const fetchStock = () => API.get(`/stock`);
 
 export const createProformaInvoice = (newProformaInvoice) => API1.post("/pi/syria", newProformaInvoice);
 
-export const deleteProformaInvoice = (id) => API.delete(`/pi/${id}`);
+export const deleteProformaInvoice = (id) => API1.delete(`/pi/syria/${id}`);
 
 export const createPurchaseOrder = (newPurchaseOrder) => API.post("/purchaseorder", newPurchaseOrder);
 
@@ -58,10 +59,10 @@ export const deleteProduct = (id) => API.delete(`/products/${id}`);
 
 export const getLastPiNo = () => API1.get("/pi/last");
 
-export const getProformaInvoices = (id) => API1.get(`/pi`);
+export const getProformaInvoices = (id) => API1.get(`/pi/syria`);
 
-export const getEmployeeProformaInvoices = (empolyee_name) => API1.get(`/pi/employee?employeename=${empolyee_name}`);
+export const getEmployeeProformaInvoices = (empolyee_name) => API1.get(`/pi/syria/employee?employeename=${empolyee_name}`);
 
-export const updateProformaInvoiceStatus = (data) => API.patch(`/pi/${data.id}`, data);
+export const updateProformaInvoiceStatus = (data) => API1.patch(`/pi/syria/${data.id}`, data);
 export const getSignedEmployeeProformaInvoices = (empolyee_name) => API.get(`/pi/pisigned/employee/${empolyee_name}`);
 export const updateProformaInvoice = (id, updatedProformaInvoice) => API.patch(`/pi/update/${id}`, updatedProformaInvoice);

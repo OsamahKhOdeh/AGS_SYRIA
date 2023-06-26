@@ -17,7 +17,7 @@ export const UnderProcess = () => {
   useEffect(() => {
     const getAllCases = async () => {
       await axios
-        .get(`${BASE_URL}/archive/${CaseStatus.IN_PROGRESS}`)
+        .get(`${BASE_URL}/archive/${CaseStatus.DRAFT}`)
         .then(async (response) => {
           setAllCases(response.data);
           setBufferAllCases(response.data);
