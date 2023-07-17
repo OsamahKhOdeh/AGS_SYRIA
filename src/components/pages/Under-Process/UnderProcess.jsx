@@ -31,10 +31,7 @@ export const UnderProcess = () => {
   }, [refresh]);
   const openPdfFile = (caseName, type) => {
     axios({
-      url: `${BASE_URL}/archive/archive/${caseName.replace(
-        / /g,
-        "_"
-      )}?type=${type}`,
+      url: `${BASE_URL}/archive/archive/${caseName.replace(/ /g, "_")}?type=${type}`,
       method: "GET",
       responseType: "blob",
     })
@@ -89,9 +86,7 @@ export const UnderProcess = () => {
   useEffect(() => {
     const filterCases = () => {
       if (query?.length > 2) {
-        let bufferCases = allCases.filter((item) =>
-          item.caseName.toLowerCase().includes(query.toLowerCase())
-        );
+        let bufferCases = allCases.filter((item) => item.caseName.toLowerCase().includes(query.toLowerCase()));
         setAllCases(bufferCases);
       } else {
         setAllCases(bufferAllCases);
@@ -109,13 +104,7 @@ export const UnderProcess = () => {
         <div className="card-body">
           {allCases.length > 0 && (
             <div className="form-group">
-              <input
-                type="text"
-                value={query}
-                className="form-control"
-                placeholder="Enter case name "
-                onChange={(e) => setQuery(e.target.value)}
-              />
+              <input type="text" value={query} className="form-control" placeholder="Enter case name " onChange={(e) => setQuery(e.target.value)} />
             </div>
           )}
           {allCases.length <= 0 && (
@@ -133,9 +122,7 @@ export const UnderProcess = () => {
                 </div>
                 <div className="files-cases">
                   <div className="file-case">
-                    {item.files.findIndex(
-                      (f) => f.type === ArchiveFileType.PKL
-                    ) != -1 ? (
+                    {item.files.findIndex((f) => f.type === ArchiveFileType.PKL) != -1 ? (
                       <i
                         class="fas fa-file-pdf"
                         htmlFor="inv_file"
@@ -148,29 +135,21 @@ export const UnderProcess = () => {
                     )}
                     <strong>Packing List</strong>
                   </div>
-                  {/* <div className="file-case">
-                    <label htmlFor="inv_file">
-                      {!setFileInvoice ? (
-                        <i class="fas fa-file-pdf"></i>
-                      ) : (
-                        <i class="far fa-file-pdf"></i>
-                      )}
-                    </label>
-                    <input
-                      type="file"
-                      className="d-none"
-                      accept="application/pdf"
-                      id="inv_file"
-                      onClick={(e) => {
-                        handleFileChange(e);
-                      }}
-                    />
-                    <strong>Invoice</strong>
-                  </div> */}
-                  {/* <div className="file-case">
-                    {item.files.findIndex(
-                      (f) => f.type === ArchiveFileType.AS
-                    ) != -1 ? (
+                  <div className="file-case">
+                    {item.files.findIndex((f) => f.type === ArchiveFileType.BEOE) != -1 ? (
+                      <i
+                        class="fas fa-file-pdf"
+                        onClick={() => {
+                          openPdfFile(item.caseName, ArchiveFileType.BEOE);
+                        }}
+                      ></i>
+                    ) : (
+                      <i class="far fa-file-pdf"></i>
+                    )}
+                    <strong>PER</strong>
+                  </div>
+                  <div className="file-case">
+                    {item.files.findIndex((f) => f.type === ArchiveFileType.AS) != -1 ? (
                       <i
                         class="fas fa-file-pdf"
                         onClick={() => {
@@ -180,8 +159,21 @@ export const UnderProcess = () => {
                     ) : (
                       <i class="far fa-file-pdf"></i>
                     )}
-                    <strong>As</strong>
-                  </div> */}
+                    <strong>CR</strong>
+                  </div>
+                  <div className="file-case">
+                    {item.files.findIndex((f) => f.type === ArchiveFileType.INVOICE) != -1 ? (
+                      <i
+                        class="fas fa-file-pdf"
+                        onClick={() => {
+                          openPdfFile(item.caseName, ArchiveFileType.INVOICE);
+                        }}
+                      ></i>
+                    ) : (
+                      <i class="far fa-file-pdf"></i>
+                    )}
+                    <strong>INV</strong>
+                  </div>
                 </div>
                 <div className="case-footer-view">
                   <h5>INV No</h5>
