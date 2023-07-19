@@ -11,7 +11,7 @@ export const Navbar = () => {
   };
   const redirectRoute = () => {
     if (roles.includes(Roles.Admin)) {
-      navigate("/admin/makepo");
+      navigate("/user/makepo");
     } else if (roles.includes(Roles.Logistic)) {
       navigate("/add-case");
     } else if (roles.includes(Roles.Archiver)) {
@@ -33,13 +33,7 @@ export const Navbar = () => {
         </div>
         {/* <h4>Al Sharak</h4> */}
         <div className="menus-items">
-          <button
-            class="nav_link"
-            type="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+          <button class="nav_link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <a class="menu-icon">
               <i class="uil uil-bars"></i>
             </a>
@@ -105,7 +99,6 @@ export const Navbar = () => {
                     Under Process
                   </a>
                 </Link>
-           
               </>
             )}
             <Link
