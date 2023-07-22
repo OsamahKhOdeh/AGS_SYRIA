@@ -1,9 +1,9 @@
 import axios from "axios";
 // export const BASE_URL = "https://wibxc.xyz/api";
-// export const BASE_URL = "http://10.255.254.16:5000";
+export const BASE_URL = "http://10.255.254.34:5000";
 // export const BASE_URL_DUBAI = "http://143.42.61.215:5000";
 export const BASE_URL_DUBAI = "https://agints.vip/api";
-export const BASE_URL = "https://wibxc.xyz/api";
+// export const BASE_URL = "https://wibxc.xyz/api";
 const API = axios.create({ baseURL: BASE_URL });
 const API1 = axios.create({ baseURL: BASE_URL_DUBAI });
 // const API = axios.create({ baseURL: BASE_URL_DUBAI });

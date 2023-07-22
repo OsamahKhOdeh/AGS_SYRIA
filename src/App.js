@@ -21,6 +21,7 @@ import Orders from "./components/pages/LayoutAdmin/Orders/Orders";
 import EditItems from "./components/pages/LayoutAdmin/EditItems/EditItems";
 import AllPIs from "./components/pages/LayoutAdmin/AllPIS/AllPIs";
 import Finance from "./components/pages/LayoutAdmin/Finance/Finance";
+import ExchangeRate from "./components/pages/LayoutAdmin/ExchangeRate/ExchangeRate";
 // import { useEffect } from "react";
 // import { loading } from "./actions";
 // import { connect, useDispatch, useSelector } from "react-redux";
@@ -90,6 +91,7 @@ function App() {
                       </Route>
                       <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
                         <Route path="editstock" element={<EditStock2 />}></Route>
+                        <Route path="exchange" element={<ExchangeRate />}></Route>
                       </Route>
                       <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Sales]} />}>
                         <Route path="editItems" element={<EditItems />}></Route>

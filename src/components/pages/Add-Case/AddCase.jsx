@@ -40,7 +40,6 @@ export const AddCase = () => {
     formData.append("caseDate", startDate);
     formData.append("logisticEmployee", "osama");
     formData.append("file", file);
-
     axios
       .post(`${BASE_URL}/archive`, formData)
       .then((response) => {
@@ -69,13 +68,7 @@ export const AddCase = () => {
                   <label htmlFor="case_id">
                     PKL Number <span className="required">*</span>
                   </label>
-                  <input
-                    type="text"
-                    id="case_id"
-                    value={pklNumber}
-                    onChange={(event) => setPklNumber(event.target.value)}
-                    className="form-control"
-                  />
+                  <input type="text" id="case_id" value={pklNumber} onChange={(event) => setPklNumber(event.target.value)} className="form-control" />
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12">
@@ -83,25 +76,14 @@ export const AddCase = () => {
                   <label htmlFor="case_id">
                     INV Number <span className="required">*</span>
                   </label>
-                  <input
-                    type="text"
-                    id="case_id"
-                    value={invNumber}
-                    onChange={(event) => setInvNumber(event.target.value)}
-                    className="form-control"
-                  />
+                  <input type="text" id="case_id" value={invNumber} onChange={(event) => setInvNumber(event.target.value)} className="form-control" />
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12">
                 <div className="form-group">
                   <label htmlFor="date_id">Case Date</label>
                   {/* <input type="date" id='date_id' className='form-control' /> */}
-                  <DatePicker
-                    selected={startDate}
-                    value={startDate}
-                    className="form-control"
-                    onChange={(date) => setStartDate(date)}
-                  />
+                  <DatePicker selected={startDate} value={startDate} className="form-control" onChange={(date) => setStartDate(date)} />
                   {!file && (
                     <div className="no-files">
                       <strong>
@@ -116,8 +98,7 @@ export const AddCase = () => {
                         <i class="uil uil--open"></i>
                       </strong>
                       <span className="file-name success">
-                        <i class="uil uil-folder-check "></i>{" "}
-                        {file && `${file.name}`}
+                        <i class="uil uil-folder-check "></i> {file && `${file.name}`}
                       </span>
                     </div>
                   )}
@@ -134,23 +115,12 @@ export const AddCase = () => {
                     </span>
                     <label htmlFor="pkl_id">Select packing list PDF</label>
                   </div>
-                  <input
-                    type="file"
-                    id="pkl_id"
-                    accept="application/pdf"
-                    onChange={handleFileChange}
-                    className="form-control"
-                  />
+                  <input type="file" id="pkl_id" accept="application/pdf" onChange={handleFileChange} className="form-control" />
                 </div>
               </div>
             </div>
             <div className="btn-add-case">
-              <button
-                type="button"
-                className="shark-btn-main"
-                disabled={!file || invNumber === "" || pklNumber === ""}
-                onClick={handleAddCase}
-              >
+              <button type="button" className="shark-btn-main" disabled={!file || invNumber === "" || pklNumber === ""} onClick={handleAddCase}>
                 Add
               </button>
             </div>

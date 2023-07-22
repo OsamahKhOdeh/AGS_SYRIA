@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import "./style/product.css";
 
-
 import { Button, TextField } from "@material-ui/core";
 import { deleteProduct, updateProductPrices, uploadDatasheet } from "../../../../../../actions/products";
 import { addProducttocart, deletProductformCart } from "../../../../../../store/cartSlice";
@@ -60,7 +59,7 @@ const Product = ({ product, index }) => {
   };
 
   const [isUploading, setIsUploading] = useState(false);
-  const {roles,username} = useAuth()
+  const { roles, username } = useAuth();
   const classes = useStyles();
 
   const handleUpload = async () => {
@@ -76,11 +75,11 @@ const Product = ({ product, index }) => {
   };
 
   const handlePriceStockChange = () => {
-      let prices = {
-      netPrice : parseFloat(netPrice),
-      retailPrice : parseFloat(retailPrice),
-      wholesalePrice : parseFloat(wholesalePrice),
-    }
+    let prices = {
+      netPrice: parseFloat(netPrice),
+      retailPrice: parseFloat(retailPrice),
+      wholesalePrice: parseFloat(wholesalePrice),
+    };
     dispatch(updateProductPrices(product._id, prices));
     // dispatch(
     //   updateProduct(product._id, {
@@ -164,15 +163,17 @@ const Product = ({ product, index }) => {
   const handleShow = (product) => {
     console.log(product);
     setShow(true);
-    setBufferProduct(product)
-  }
+    setBufferProduct(product);
+  };
 
   return (
     <div className="item_card">
       <ToastContainer />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Update {bufferProduct?.brand} {bufferProduct?.code}</Modal.Title>
+          <Modal.Title>
+            Update {bufferProduct?.brand} {bufferProduct?.code}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>are you sure you want to delete</h4>{" "}
@@ -210,8 +211,8 @@ const Product = ({ product, index }) => {
            <i class="uil uil-edit"></i>
           </div> */}
         </div>
-        
-          {/* <div className="product__description">
+
+        {/* <div className="product__description">
             {product.brand}
             {product.code}
           </div> */}
@@ -263,81 +264,81 @@ const Product = ({ product, index }) => {
                 <span>({product.capacity})</span>
               </p>
               <div class="grid-container">
-                {/* <div class="grid-item">
-                    <p>Capacity</p>
-                    <h5>5 Ah</h5>
-                  </div> */}
-                {/* <div class="grid-item"> */}
                 <div class="grid-item">
                   <p>Price</p>
                   <h5>
                     {location === "freezone" ? product.freezonePrice : product.LocalPrice}&nbsp;{"$"}
                   </h5>
                 </div>
-                {/* </div> */}
-                {/* <div class="grid-item"> */}
                 <div class="grid-item">
                   <p>Stock </p>
-                  <h5 className="success">
-                  {product.stock}
-                  </h5>
+                  <h5 className="success">{product.stock}</h5>
                 </div>
-                {/* </div> */}
               </div>
             </div>
             <div>
-              {roles.includes(Roles.Admin)  && (
+              {roles.includes(Roles.Admin) && (
                 <div class="input-group input-group-sm ">
                   <div class="input-group-prepend">
-                    <small class="input-group-text" id="inputGroup-sizing-sm">Net  Price</small>
+                    <small class="input-group-text" id="inputGroup-sizing-sm">
+                      Net Price
+                    </small>
                   </div>
-                  <input type="text" class="form-control" value={netPrice} onChange={(e) => {
-                    setNetPrice(e.target.value);
-                    // setStateProduct({
-                    //   ...stateProduct,
-                    //   price: e.target.value,
-                    //   stock: stock,
-                    //   freezoneToLocalPercentage: freezoneToLocalPercentage,
-                    //   additionOnLocalPercentage: additionOnLocalPercentage,
-                    // });
-                  }} aria-label="Small" aria-describedby="inputGroup-sizing-sm"/>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={netPrice}
+                    onChange={(e) => {
+                      setNetPrice(e.target.value);
+                    }}
+                    aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm"
+                  />
                 </div>
               )}
-                  <div class="input-group input-group-sm ">
-                  <div class="input-group-prepend">
-                    <small  class="input-group-text" id="inputGroup-sizing-sm">Retail Price</small>
-                  </div>
-                  <input type="text" class="form-control" disabled={!roles.includes(Roles.Admin)} value={retailPrice} onChange={(e) => {
-                  setRetailPrice(e.target.value);
-                    // setStateProduct({
-                    //   ...stateProduct,
-                    //   price: e.target.value,
-                    //   stock: stock,
-                    //   freezoneToLocalPercentage: freezoneToLocalPercentage,
-                    //   additionOnLocalPercentage: additionOnLocalPercentage,
-                    // });
-                  }} aria-label="Small" aria-describedby="inputGroup-sizing-sm"/>
+              <div class="input-group input-group-sm ">
+                <div class="input-group-prepend">
+                  <small class="input-group-text" id="inputGroup-sizing-sm">
+                    Retail Price
+                  </small>
                 </div>
-                  <div class="input-group input-group-sm ">
-                  <div class="input-group-prepend">
-                    <small class="input-group-text" id="inputGroup-sizing-sm">Wholesale</small>
-                  </div>
-                  <input type="text" class="form-control" value={wholesalePrice} disabled={!roles.includes(Roles.Admin)} onChange={(e) => {
+                <input
+                  type="text"
+                  class="form-control"
+                  disabled={!roles.includes(Roles.Admin)}
+                  value={retailPrice}
+                  onChange={(e) => {
+                    setRetailPrice(e.target.value);
+                  }}
+                  aria-label="Small"
+                  aria-describedby="inputGroup-sizing-sm"
+                />
+              </div>
+              <div class="input-group input-group-sm ">
+                <div class="input-group-prepend">
+                  <small class="input-group-text" id="inputGroup-sizing-sm">
+                    Wholesale
+                  </small>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  value={wholesalePrice}
+                  disabled={!roles.includes(Roles.Admin)}
+                  onChange={(e) => {
                     setWholesalePrice(e.target.value);
-                    // setStateProduct({
-                    //   ...stateProduct,
-                    //   price: e.target.value,
-                    //   stock: stock,
-                    //   freezoneToLocalPercentage: freezoneToLocalPercentage,
-                    //   additionOnLocalPercentage: additionOnLocalPercentage,
-                    // });
-                  }} aria-label="Small" aria-describedby="inputGroup-sizing-sm"/>
-                </div>
-                <div className="btn-update-item"> 
-                  <button className="ags-btn-main-fill w-100" disabled={isUploading} onClick={handlePriceStockChange}>Update Prices</button>
-                </div>
+                  }}
+                  aria-label="Small"
+                  aria-describedby="inputGroup-sizing-sm"
+                />
+              </div>
+              <div className="btn-update-item">
+                <button className="ags-btn-main-fill w-100" disabled={isUploading} onClick={handlePriceStockChange}>
+                  Update Prices
+                </button>
+              </div>
             </div>
-                {/* <Button
+            {/* <Button
               disabled={isUploading}
               variant="contained"
               style={{ marginTop: "10px", backgroundColor: "#5e99ff" }}

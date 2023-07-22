@@ -52,6 +52,15 @@ export const LayoutAdmin = () => {
             </a>
           </>
         )}
+        {roles.includes(Roles.Admin) && (
+          <>
+            <a href="">
+              <Link to="/user/exchange" onClick={closeNav}>
+                Exchange Rate
+              </Link>
+            </a>
+          </>
+        )}
         {/* <a href="">
       <Link to="/admin/finance">Finance</Link>
     </a> */}
