@@ -22,6 +22,8 @@ import EditItems from "./components/pages/LayoutAdmin/EditItems/EditItems";
 import AllPIs from "./components/pages/LayoutAdmin/AllPIS/AllPIs";
 import Finance from "./components/pages/LayoutAdmin/Finance/Finance";
 import ExchangeRate from "./components/pages/LayoutAdmin/ExchangeRate/ExchangeRate";
+import { ToastContainer } from "react-toastify";
+import WebsitePage from "./components/pages/WebsitePage/WebsitePage";
 // import { useEffect } from "react";
 // import { loading } from "./actions";
 // import { connect, useDispatch, useSelector } from "react-redux";
@@ -63,9 +65,11 @@ function App() {
     <>
       {
         <div className="App">
+          <ToastContainer />
           <BrowserRouter>
             <Routes>
               <Route path="/login" element={<Login />}></Route>
+              <Route path="/website" element={<WebsitePage />}></Route>
               <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
                 <Route path="/" element={<Layout />}>
                   <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Logistic]} />}>

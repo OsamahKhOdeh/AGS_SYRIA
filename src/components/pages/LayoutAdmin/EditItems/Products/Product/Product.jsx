@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -15,6 +14,7 @@ import { deleteProductState } from "../../../../../../store/productsSlice";
 import Modal from "react-bootstrap/Modal";
 import { Roles } from "../../../../Enum/Constants";
 import useAuth from "../../../../../../hooks/useAuth";
+import { toast } from "react-toastify";
 const Product = ({ product, index }) => {
   const currency = useSelector((state) => state.filters.currency);
 
@@ -168,7 +168,6 @@ const Product = ({ product, index }) => {
 
   return (
     <div className="item_card">
-      <ToastContainer />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>

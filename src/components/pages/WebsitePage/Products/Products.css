@@ -1,0 +1,25 @@
+.products_container{
+    width: 100%;
+}
+
+.spinner_container{
+    margin: auto;
+    width: 100%;
+}
+
+.grid_web{
+     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 0fr));
+    gap: 35px;
+    align-items: stretch;
+    /* margin: auto; */
+    justify-content: center;
+}
+.card{
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important;
+  border: 0 !important;
+  border-radius: 15px !important;
+}
+.card:hover{
+  border: 0 !important;
+}

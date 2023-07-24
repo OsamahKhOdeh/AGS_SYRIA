@@ -33,7 +33,7 @@ export const LayoutAdmin = () => {
         </a>
         <a href="">
           <Link to="/user/editItems" onClick={closeNav}>
-            Products
+            Edit Products
           </Link>
         </a>
         {roles.includes(Roles.Admin || Roles.Financial || Roles.SalesManager) && (
@@ -61,6 +61,11 @@ export const LayoutAdmin = () => {
             </a>
           </>
         )}
+        <a href="">
+          <Link to="/website" onClick={closeNav}>
+            Products
+          </Link>
+        </a>
         {/* <a href="">
       <Link to="/admin/finance">Finance</Link>
     </a> */}

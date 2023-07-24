@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import "./addcase.scss";
 import Card from "../shared/Card/Card";
 import { showToastMessage } from "../shared/Toaster/Toaster";
-import { ToastContainer } from "react-toastify";
 import DatePicker from "react-datepicker";
 import { ArchiveFileType, CaseStatus, ToastType } from "../Enum/Constants";
 import { BASE_URL } from "../../../config/Config";
@@ -55,7 +54,6 @@ export const AddCase = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="card card-add-case">
         <div className="card-tittle">
           <h5>Add New Case </h5>

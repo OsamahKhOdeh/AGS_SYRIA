@@ -5,7 +5,6 @@ import { ArchiveFileType, CaseStatus, ToastType } from "../Enum/Constants";
 import axios from "axios";
 import { BASE_URL } from "../../../config/Config";
 import { formateDate } from "../shared/functions/global";
-import { ToastContainer } from "react-toastify";
 export const UnderProcess = () => {
   const [allCases, setAllCases] = useState([]);
   const [inoviceNumber, setInoviceNumber] = useState("");
@@ -96,7 +95,6 @@ export const UnderProcess = () => {
   }, [query]);
   return (
     <>
-      <ToastContainer />
       <div className="card">
         <div className="card-tittle">
           <h5>Cases under process </h5>

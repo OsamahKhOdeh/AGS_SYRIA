@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Navbar from "../pages/Navbar/Navbar";
 import { Outlet, redirect, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { Roles } from "../pages/Enum/Constants";
 import useAuth from "../../hooks/useAuth";
 

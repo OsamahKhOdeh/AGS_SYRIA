@@ -8,7 +8,6 @@ import { ToastType } from "../Enum/Constants";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../../actions/auth";
-import { ToastContainer } from "react-toastify";
 export const Login = () => {
   const [isHidden, setIsHidden] = useState(true);
   const navigate = useNavigate();
@@ -76,36 +75,17 @@ export const Login = () => {
   };
   return (
     <>
-      <ToastContainer />;{/* // New Page to login  */}
       <div className="login-new desktop-design">
         <div class="container right-panel-active" id="container">
           <div class="form-container sign-up-container">
             <form>
               <h1>Login </h1>
               <br />
-              <input
-                type="text"
-                placeholder="User Name"
-                ref={usernameD}
-                autoComplete="on"
-              />
+              <input type="text" placeholder="User Name" ref={usernameD} autoComplete="on" />
               <div className="form-group">
-                <input
-                  type={`${isHidden ? "password" : "text"}`}
-                  placeholder="Password"
-                  ref={psswdD}
-                  autoComplete="on"
-                  onKeyDown={handleKeyDown}
-                />
-                {!isHidden && (
-                  <i class="uil uil-eye" onClick={() => setIsHidden(true)}></i>
-                )}
-                {isHidden && (
-                  <i
-                    class="uil uil-eye-slash"
-                    onClick={() => setIsHidden(false)}
-                  ></i>
-                )}
+                <input type={`${isHidden ? "password" : "text"}`} placeholder="Password" ref={psswdD} autoComplete="on" onKeyDown={handleKeyDown} />
+                {!isHidden && <i class="uil uil-eye" onClick={() => setIsHidden(true)}></i>}
+                {isHidden && <i class="uil uil-eye-slash" onClick={() => setIsHidden(false)}></i>}
               </div>
               <button type="button" onClick={handleSubmitD}>
                 Login
@@ -131,28 +111,11 @@ export const Login = () => {
             </div>
             <h1>Login </h1>
             <br />
-            <input
-              type="text"
-              placeholder="User Name"
-              ref={username}
-              autocomplete="on"
-            />
+            <input type="text" placeholder="User Name" ref={username} autocomplete="on" />
             <div className="form-group">
-              <input
-                type={`${isHidden ? "password" : "text"}`}
-                placeholder="Password"
-                ref={psswd}
-                autocomplete="on"
-              />
-              {!isHidden && (
-                <i class="uil uil-eye" onClick={() => setIsHidden(true)}></i>
-              )}
-              {isHidden && (
-                <i
-                  class="uil uil-eye-slash"
-                  onClick={() => setIsHidden(false)}
-                ></i>
-              )}
+              <input type={`${isHidden ? "password" : "text"}`} placeholder="Password" ref={psswd} autocomplete="on" />
+              {!isHidden && <i class="uil uil-eye" onClick={() => setIsHidden(true)}></i>}
+              {isHidden && <i class="uil uil-eye-slash" onClick={() => setIsHidden(false)}></i>}
             </div>
             <button type="button" onClick={handleSubmit}>
               Login{" "}

@@ -4,7 +4,6 @@ import axios from "axios";
 import { ArchiveFileType, CaseStatus, ToastType } from "../Enum/Constants";
 import { BASE_URL } from "../../../config/Config";
 import { formateDate } from "../shared/functions/global";
-import { ToastContainer } from "react-toastify";
 import { showToastMessage } from "../shared/Toaster/Toaster";
 export const History = () => {
   const [allCases, setAllCases] = useState([]);
@@ -27,9 +26,7 @@ export const History = () => {
   useEffect(() => {
     const filterCases = () => {
       if (query?.length > 2) {
-        let bufferCases = allCases.filter((item) =>
-          item.caseName.toLowerCase().includes(query.toLowerCase())
-        );
+        let bufferCases = allCases.filter((item) => item.caseName.toLowerCase().includes(query.toLowerCase()));
         setAllCases(bufferCases);
       } else {
         setAllCases(bufferAllCases);
@@ -57,10 +54,7 @@ export const History = () => {
     // });
     //
     axios({
-      url: `${BASE_URL}/archive/archive/${caseName.replace(
-        / /g,
-        "_"
-      )}?type=${type}`,
+      url: `${BASE_URL}/archive/archive/${caseName.replace(/ /g, "_")}?type=${type}`,
       method: "GET",
       responseType: "blob",
     })
@@ -79,7 +73,6 @@ export const History = () => {
   };
   return (
     <>
-      <ToastContainer />
       <div className="card">
         <div className="card-tittle">
           <h5>History </h5>
@@ -87,13 +80,7 @@ export const History = () => {
         <div className="card-body">
           {allCases.length > 0 && (
             <div className="form-group">
-              <input
-                type="text"
-                value={query}
-                className="form-control"
-                placeholder="Enter case name "
-                onChange={(e) => setQuery(e.target.value)}
-              />
+              <input type="text" value={query} className="form-control" placeholder="Enter case name " onChange={(e) => setQuery(e.target.value)} />
             </div>
           )}
           {allCases.length <= 0 && (
@@ -112,9 +99,7 @@ export const History = () => {
                   </div>
                   <div className="files-cases">
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.PKL
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.PKL) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {
@@ -127,9 +112,7 @@ export const History = () => {
                       <strong>Packing List</strong>
                     </div>
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.BEOE
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.BEOE) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {
@@ -142,9 +125,7 @@ export const History = () => {
                       <strong>PER</strong>
                     </div>
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.AS
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.AS) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {
@@ -157,9 +138,7 @@ export const History = () => {
                       <strong>CR</strong>
                     </div>
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.INVOICE
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.INVOICE) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {

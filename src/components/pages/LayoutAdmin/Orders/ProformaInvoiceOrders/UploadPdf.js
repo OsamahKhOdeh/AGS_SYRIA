@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./uploadpdf_styles.css";
-import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { BASE_URL } from "../../../../../api/index";
+import { toast } from "react-toastify";
 
 function UploadPdf({ pi, setLoading }) {
   const showToastMessage = (msg, status) => {
@@ -46,11 +46,7 @@ function UploadPdf({ pi, setLoading }) {
     //dispatch(updateProformaInvoiceStatus({ id: pi._id, newStatus: "Signed" }));
 
     const formData = new FormData();
-    formData.append(
-      "pdf",
-      pdfFile,
-      `signed_${pi.pi_no}_${pi.employee}_${pi.manager}_${pi._id}_${pi.buyer_address}`
-    );
+    formData.append("pdf", pdfFile, `signed_${pi.pi_no}_${pi.employee}_${pi.manager}_${pi._id}_${pi.buyer_address}`);
 
     axios
       .post(`${BASE_URL}/pi/pisigned`, formData, {
@@ -73,18 +69,10 @@ function UploadPdf({ pi, setLoading }) {
 
   return (
     <>
-      <ToastContainer />
       <form className="form_upload" onSubmit={handleSubmit}>
         <label htmlFor="pi_upload">
           <i class="uil uil-upload"></i>
-          <input
-            id="pi_upload"
-            style={{ width: "110px" }}
-            type="file"
-            accept="application/pdf"
-            onChange={handleFileChange}
-            autocomplete="on"
-          />
+          <input id="pi_upload" style={{ width: "110px" }} type="file" accept="application/pdf" onChange={handleFileChange} autocomplete="on" />
         </label>
         <button type="submit" className="ags-btn-main-fill" disabled={!pdfFile}>
           {" "}

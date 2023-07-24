@@ -5,14 +5,14 @@ const filtersInitialState = {
   usdToAedRate: 3.67,
   currency: "USD",
   location: "freezone",
-}
+  isWholesale: false,
+};
 
 export const filtersSlice = createSlice({
   name: "filters",
   initialState: filtersInitialState,
   reducers: {
-
-    clearFilters : (state,action) => {
+    clearFilters: (state, action) => {
       state.filters = { categories: ["All"], countries: ["All"] };
       state.currency = "USD";
       state.location = "freezone";
@@ -30,9 +30,12 @@ export const filtersSlice = createSlice({
     changeLocation(state, action) {
       state.location = action.payload;
     },
+    setIsWholesale(state, action) {
+      state.isWholesale = action.payload;
+    },
   },
 });
 
-export const { setFiltersState, setUsdToAedRate, changeCurrency, changeLocation ,clearFilters } = filtersSlice.actions;
+export const { setFiltersState, setUsdToAedRate, changeCurrency, changeLocation, clearFilters, setIsWholesale } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

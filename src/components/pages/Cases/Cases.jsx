@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./cases.scss";
 import { ArchiveFileType, CaseStatus, ToastType } from "../Enum/Constants";
 import { showToastMessage } from "../shared/Toaster/Toaster";
-import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../../../config/Config";
 import { formateDate } from "../shared/functions/global";
@@ -34,10 +33,7 @@ export const Cases = () => {
   const handleFilePklChange = (e) => {
     if (e.target.files) {
       if (e.target.files[0].size / 1024 < 2) {
-        showToastMessage(
-          `File has size bigger than 2 MB,please choose another file`,
-          ToastType.Erorr
-        );
+        showToastMessage(`File has size bigger than 2 MB,please choose another file`, ToastType.Erorr);
       } else {
         setFilePKL(e.target.files[0]);
       }
@@ -50,10 +46,7 @@ export const Cases = () => {
   const handleFilePOEChange = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size / 1024 < 2) {
-        showToastMessage(
-          `File has size bigger than  2 MB,please choose another file`,
-          ToastType.Erorr
-        );
+        showToastMessage(`File has size bigger than  2 MB,please choose another file`, ToastType.Erorr);
       } else {
         setFilePOE(e.target.files[0]);
       }
@@ -66,10 +59,7 @@ export const Cases = () => {
   const handleFileASChange = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size / 1024 < 2) {
-        showToastMessage(
-          `File has size bigger than  2 MB,please choose another file`,
-          ToastType.Erorr
-        );
+        showToastMessage(`File has size bigger than  2 MB,please choose another file`, ToastType.Erorr);
       } else {
         setFileAS(e.target.files[0]);
       }
@@ -81,10 +71,7 @@ export const Cases = () => {
   const handleFileInvChange = (e) => {
     if (e.target.files[0]) {
       if (e.target.files[0].size / 1024 < 2) {
-        showToastMessage(
-          `File has size bigger than  2 MB,please choose another file`,
-          ToastType.Erorr
-        );
+        showToastMessage(`File has size bigger than  2 MB,please choose another file`, ToastType.Erorr);
       } else {
         setFileInv(e.target.files[0]);
       }
@@ -94,10 +81,7 @@ export const Cases = () => {
   };
   const openPdfFile = (caseName, type) => {
     axios({
-      url: `${BASE_URL}/archive/archive/${caseName.replace(
-        / /g,
-        "_"
-      )}?type=${type}`,
+      url: `${BASE_URL}/archive/archive/${caseName.replace(/ /g, "_")}?type=${type}`,
       method: "GET",
       responseType: "blob",
     })
@@ -180,9 +164,7 @@ export const Cases = () => {
   useEffect(() => {
     const filterCases = () => {
       if (query?.length > 2) {
-        let bufferCases = allCases.filter((item) =>
-          item.caseName.toLowerCase().includes(query.toLowerCase())
-        );
+        let bufferCases = allCases.filter((item) => item.caseName.toLowerCase().includes(query.toLowerCase()));
         setAllCases(bufferCases);
       } else {
         setAllCases(bufferAllCases);
@@ -192,7 +174,6 @@ export const Cases = () => {
   }, [query]);
   return (
     <>
-      <ToastContainer />
       <div className="card">
         <div className="card-tittle">
           <h5>All Cases </h5>
@@ -200,13 +181,7 @@ export const Cases = () => {
         <div className="card-body">
           {allCases.length > 0 && (
             <div className="form-group">
-              <input
-                type="text"
-                value={query}
-                className="form-control"
-                placeholder="Enter case name "
-                onChange={(e) => setQuery(e.target.value)}
-              />
+              <input type="text" value={query} className="form-control" placeholder="Enter case name " onChange={(e) => setQuery(e.target.value)} />
             </div>
           )}
           <div className="cases-grid">
@@ -219,9 +194,7 @@ export const Cases = () => {
                   </div>
                   <div className="files-cases">
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.PKL
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.PKL) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {
@@ -234,9 +207,7 @@ export const Cases = () => {
                       <strong>Packing List</strong>
                     </div>
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.BEOE
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.BEOE) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {
@@ -249,9 +220,7 @@ export const Cases = () => {
                       <strong>PER</strong>
                     </div>
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.AS
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.AS) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {
@@ -264,9 +233,7 @@ export const Cases = () => {
                       <strong>CR</strong>
                     </div>
                     <div className="file-case">
-                      {item.files.findIndex(
-                        (f) => f.type === ArchiveFileType.INVOICE
-                      ) != -1 ? (
+                      {item.files.findIndex((f) => f.type === ArchiveFileType.INVOICE) != -1 ? (
                         <i
                           class="fas fa-file-pdf"
                           onClick={() => {
@@ -279,12 +246,7 @@ export const Cases = () => {
                       <strong>INV</strong>
                     </div>
                   </div>
-                  <div
-                    className="case-grid-footer"
-                    onClick={() => setCurrentCase(item)}
-                    data-toggle="modal"
-                    data-target=".bd-example-modal-lg"
-                  >
+                  <div className="case-grid-footer" onClick={() => setCurrentCase(item)} data-toggle="modal" data-target=".bd-example-modal-lg">
                     <span>upload</span>
                   </div>
                 </div>
@@ -300,25 +262,14 @@ export const Cases = () => {
       </div>
       {/* modal for upload pdfs */}
       {currentCase && (
-        <div
-          class="modal fade bd-example-modal-lg"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="myLargeModalLabel"
-          aria-hidden="true"
-        >
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                   Edit {currentCase.caseName}
                 </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -328,16 +279,11 @@ export const Cases = () => {
                     {/* <span className='btn-delete'><i class="uil uil-trash-alt"></i></span> */}
                     <div className="files-cases">
                       <div className="file-case">
-                        {currentCase.files.findIndex(
-                          (f) => f.type === ArchiveFileType.PKL
-                        ) != -1 ? (
+                        {currentCase.files.findIndex((f) => f.type === ArchiveFileType.PKL) != -1 ? (
                           <i
                             class="fas fa-file-pdf"
                             onClick={() => {
-                              openPdfFile(
-                                currentCase.caseName,
-                                ArchiveFileType.PKL
-                              );
+                              openPdfFile(currentCase.caseName, ArchiveFileType.PKL);
                             }}
                           ></i>
                         ) : (
@@ -347,22 +293,12 @@ export const Cases = () => {
                         <strong>Packing List</strong>
                       </div>
                     </div>
-                    <input
-                      type="file"
-                      id="file_pkl"
-                      className="d-none"
-                      accept="application/pdf"
-                      onChange={handleFilePklChange}
-                    />
+                    <input type="file" id="file_pkl" className="d-none" accept="application/pdf" onChange={handleFilePklChange} />
                     <div className="upload-select">
                       <label htmlFor="file_pkl" className="case-grid-footer">
                         <span>Select</span>
                       </label>
-                      <button
-                        disabled={!filePKL}
-                        className="case-grid-footer"
-                        onClick={() => UploadFile(ArchiveFileType.PKL, filePKL)}
-                      >
+                      <button disabled={!filePKL} className="case-grid-footer" onClick={() => UploadFile(ArchiveFileType.PKL, filePKL)}>
                         <span>Upload</span>
                       </button>
                     </div>
@@ -371,16 +307,11 @@ export const Cases = () => {
                     {/* <span className='btn-delete'><i class="uil uil-trash-alt"></i></span> */}
                     <div className="files-cases">
                       <div className="file-case">
-                        {currentCase.files.findIndex(
-                          (f) => f.type === ArchiveFileType.BEOE
-                        ) != -1 ? (
+                        {currentCase.files.findIndex((f) => f.type === ArchiveFileType.BEOE) != -1 ? (
                           <i
                             class="fas fa-file-pdf"
                             onClick={() => {
-                              openPdfFile(
-                                currentCase.caseName,
-                                ArchiveFileType.PEOE
-                              );
+                              openPdfFile(currentCase.caseName, ArchiveFileType.PEOE);
                             }}
                           ></i>
                         ) : (
@@ -390,24 +321,12 @@ export const Cases = () => {
                         <strong>PER</strong>
                       </div>
                     </div>
-                    <input
-                      type="file"
-                      id="file_poe"
-                      className="d-none"
-                      accept="application/pdf"
-                      onChange={handleFilePOEChange}
-                    />
+                    <input type="file" id="file_poe" className="d-none" accept="application/pdf" onChange={handleFilePOEChange} />
                     <div className="upload-select">
                       <label htmlFor="file_poe" className="case-grid-footer">
                         <span>Select</span>
                       </label>
-                      <button
-                        disabled={!filePOE}
-                        className="case-grid-footer"
-                        onClick={() =>
-                          UploadFile(ArchiveFileType.BEOE, filePOE)
-                        }
-                      >
+                      <button disabled={!filePOE} className="case-grid-footer" onClick={() => UploadFile(ArchiveFileType.BEOE, filePOE)}>
                         <span>Upload</span>
                       </button>
                     </div>
@@ -416,16 +335,11 @@ export const Cases = () => {
                     {/* <span className='btn-delete'><i class="uil uil-trash-alt"></i></span> */}
                     <div className="files-cases">
                       <div className="file-case">
-                        {currentCase.files.findIndex(
-                          (f) => f.type === ArchiveFileType.AS
-                        ) != -1 ? (
+                        {currentCase.files.findIndex((f) => f.type === ArchiveFileType.AS) != -1 ? (
                           <i
                             class="fas fa-file-pdf"
                             onClick={() => {
-                              openPdfFile(
-                                currentCase.caseName,
-                                ArchiveFileType.AS
-                              );
+                              openPdfFile(currentCase.caseName, ArchiveFileType.AS);
                             }}
                           ></i>
                         ) : (
@@ -435,22 +349,12 @@ export const Cases = () => {
                         <strong>CR</strong>
                       </div>
                     </div>
-                    <input
-                      type="file"
-                      id="file_as"
-                      className="d-none"
-                      accept="application/pdf"
-                      onChange={handleFileASChange}
-                    />
+                    <input type="file" id="file_as" className="d-none" accept="application/pdf" onChange={handleFileASChange} />
                     <div className="upload-select">
                       <label htmlFor="file_as" className="case-grid-footer">
                         <span>Select</span>
                       </label>
-                      <button
-                        disabled={!fileAS}
-                        className="case-grid-footer"
-                        onClick={() => UploadFile(ArchiveFileType.AS, fileAS)}
-                      >
+                      <button disabled={!fileAS} className="case-grid-footer" onClick={() => UploadFile(ArchiveFileType.AS, fileAS)}>
                         <span>Upload</span>
                       </button>
                     </div>
@@ -458,16 +362,11 @@ export const Cases = () => {
                   <div className="case-grid">
                     <div className="files-cases">
                       <div className="file-case">
-                        {currentCase.files.findIndex(
-                          (f) => f.type === ArchiveFileType.INVOICE
-                        ) != -1 ? (
+                        {currentCase.files.findIndex((f) => f.type === ArchiveFileType.INVOICE) != -1 ? (
                           <i
                             class="fas fa-file-pdf"
                             onClick={() => {
-                              openPdfFile(
-                                currentCase.caseName,
-                                ArchiveFileType.INVOICE
-                              );
+                              openPdfFile(currentCase.caseName, ArchiveFileType.INVOICE);
                             }}
                           ></i>
                         ) : (
@@ -477,24 +376,12 @@ export const Cases = () => {
                         <strong>INV</strong>
                       </div>
                     </div>
-                    <input
-                      type="file"
-                      id="file_inv"
-                      className="d-none"
-                      accept="application/pdf"
-                      onChange={handleFileInvChange}
-                    />
+                    <input type="file" id="file_inv" className="d-none" accept="application/pdf" onChange={handleFileInvChange} />
                     <div className="upload-select">
                       <label htmlFor="file_inv" className="case-grid-footer">
                         <span>Select</span>
                       </label>
-                      <button
-                        disabled={!fileInv}
-                        className="case-grid-footer"
-                        onClick={() =>
-                          UploadFile(ArchiveFileType.INVOICE, fileInv)
-                        }
-                      >
+                      <button disabled={!fileInv} className="case-grid-footer" onClick={() => UploadFile(ArchiveFileType.INVOICE, fileInv)}>
                         <span>Upload</span>
                       </button>
                     </div>
