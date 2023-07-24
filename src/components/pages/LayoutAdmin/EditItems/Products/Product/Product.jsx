@@ -68,7 +68,6 @@ const Product = ({ product, index }) => {
     data.append("upload_preset", "jix4eghn");
 
     const response = await axios.post("https://api.cloudinary.com/v1_1/dvfuxrg12/image/upload", data);
-    console.log(response.data.secure_url);
     setIsUploading(false);
     const image_url = response.data.secure_url;
     setImage(image_url);
@@ -119,7 +118,6 @@ const Product = ({ product, index }) => {
     //   freezoneToLocalPercentage: freezoneToLocalPercentage,
     //   additionOnLocalPercentage: additionOnLocalPercentage,
     // });
-    console.log(stateProduct);
     showToastMessage();
   };
 
@@ -161,7 +159,6 @@ const Product = ({ product, index }) => {
     dispatch(deleteProduct(product._id));
   };
   const handleShow = (product) => {
-    console.log(product);
     setShow(true);
     setBufferProduct(product);
   };
@@ -276,25 +273,24 @@ const Product = ({ product, index }) => {
               </div>
             </div>
             <div>
-              {roles.includes(Roles.Admin) && (
-                <div class="input-group input-group-sm ">
-                  <div class="input-group-prepend">
-                    <small class="input-group-text" id="inputGroup-sizing-sm">
-                      Net Price
-                    </small>
-                  </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    value={netPrice}
-                    onChange={(e) => {
-                      setNetPrice(e.target.value);
-                    }}
-                    aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm"
-                  />
+              <div class="input-group input-group-sm ">
+                <div class="input-group-prepend">
+                  <small class="input-group-text" id="inputGroup-sizing-sm">
+                    Net Price
+                  </small>
                 </div>
-              )}
+                <input
+                  type="text"
+                  class="form-control"
+                  value={netPrice}
+                  onChange={(e) => {
+                    setNetPrice(e.target.value);
+                  }}
+                  aria-label="Small"
+                  aria-describedby="inputGroup-sizing-sm"
+                />
+              </div>
+
               <div class="input-group input-group-sm ">
                 <div class="input-group-prepend">
                   <small class="input-group-text" id="inputGroup-sizing-sm">
@@ -304,7 +300,7 @@ const Product = ({ product, index }) => {
                 <input
                   type="text"
                   class="form-control"
-                  disabled={!roles.includes(Roles.Admin)}
+                  disabled={!roles.includes(Roles.Admin) && !roles.includes(Roles.SuperAdmin)}
                   value={retailPrice}
                   onChange={(e) => {
                     setRetailPrice(e.target.value);
@@ -323,7 +319,7 @@ const Product = ({ product, index }) => {
                   type="text"
                   class="form-control"
                   value={wholesalePrice}
-                  disabled={!roles.includes(Roles.Admin)}
+                  disabled={!roles.includes(Roles.Admin) && !roles.includes(Roles.SuperAdmin)}
                   onChange={(e) => {
                     setWholesalePrice(e.target.value);
                   }}

@@ -15,7 +15,6 @@ export const stockSlice = createSlice({
       });
     },
     updateStockState: (state, action) => {
-      console.log(action.payload);
       state.products.map((product) => {
         if (product._id === action.payload.id) {
           product.bl = action.payload.data;
@@ -29,7 +28,6 @@ export const stockSlice = createSlice({
     },
 
     fetchAll: (state, action) => {
-      console.log(action.payload);
       const data = action.payload;
       state.products = data;
     },

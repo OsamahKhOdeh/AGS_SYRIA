@@ -13,7 +13,6 @@ export const productSlice = createSlice({
       if (!existItem) {
         state.products.push(action.payload);
       } else {
-        console.log("product already exists");
       }
     },
     removeProductFromCheckedList: (state, action) => {
@@ -21,7 +20,6 @@ export const productSlice = createSlice({
       state.products = filtered;
     },
     setProductQty: (state, action) => {
-      console.log(action.payload);
       state.products.map((item) => {
         if (action.payload.id === item._id) {
           item.qty = action.payload.qty;

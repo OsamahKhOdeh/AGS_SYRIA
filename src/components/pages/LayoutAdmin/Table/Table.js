@@ -40,16 +40,12 @@ const TablePage = () => {
   }, []);
 
   const [qty, setQty] = useState("");
-  console.log(selectedProducts);
   const [newPrice, setNewPrice] = useState(selectedProducts.map((product) => calcPrice(product)));
-  console.log(newPrice);
   const [quantities, setQuantities] = useState(selectedProducts.map((item) => item.qty));
   const handleQuantityChange = (index, event) => {
-    console.log(event.target.value);
     const newQuantities = [...quantities];
     newQuantities[index] = parseInt(event.target.value);
     setQuantities(newQuantities);
-    console.log(quantities);
   };
 
   let UAERATE = 1;
@@ -140,11 +136,8 @@ const TablePage = () => {
                       value={newPrice[index]?.toFixed(3)}
                       autocomplete="on"
                       onChange={(e) => {
-                        console.log("newPrice", newPrice);
                         let newPriceArray = [...newPrice];
-                        console.log("newPriceArray", newPriceArray);
                         newPriceArray[index] = e.target.value;
-                        console.log("newPriceArray", newPriceArray);
                         setNewPrice(newPriceArray);
                       }}
                       onBlur={(e) => {
@@ -255,11 +248,8 @@ const TablePage = () => {
                       value={newPrice[index]?.toFixed(3)}
                       autocomplete="on"
                       onChange={(e) => {
-                        console.log("newPrice", newPrice);
                         let newPriceArray = [...newPrice];
-                        console.log("newPriceArray", newPriceArray);
                         newPriceArray[index] = parseFloat(e.target.value);
-                        console.log("newPriceArray", newPriceArray);
                         setNewPrice(newPriceArray);
                       }}
                       onBlur={(e) => {

@@ -1,10 +1,10 @@
 import axios from "axios";
 // export const BASE_URL = "https://wibxc.xyz/api";
-// export const BASE_URL = "http://10.255.254.34:5000";
+export const BASE_URL = "http://10.255.254.34:5000";
 // export const BASE_URL_DUBAI = "http://143.42.61.215:5000";
 export const BASE_URL_DUBAI = "https://agints.vip/api";
 export const BASE_DOMAIN = "https://agints.vip";
-export const BASE_URL = "https://wibxc.xyz/api";
+// export const BASE_URL = "https://wibxc.xyz/api";
 const API = axios.create({ baseURL: BASE_URL });
 const API1 = axios.create({ baseURL: BASE_URL_DUBAI });
 // const API = axios.create({ baseURL: BASE_URL_DUBAI });
@@ -15,7 +15,6 @@ export const login = ({ username, password }) =>
   //   API.post("/auth", { username, password }):
   API.post("/auth", { username, password });
 export const createProduct = (newProduct) => {
-  console.log(newProduct);
   API.post("/products", newProduct);
 };
 export const fetchProducts = () => API.get(`/products?limit=1000`);

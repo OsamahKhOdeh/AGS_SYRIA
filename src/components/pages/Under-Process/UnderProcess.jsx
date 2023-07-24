@@ -51,7 +51,6 @@ export const UnderProcess = () => {
     if (e.target.files) {
       setFileInvoice(e.target.files[0]);
     }
-    console.log(e.target.files[0]);
   };
   const handleInvoiceNumber = (item) => {
     // let model = {

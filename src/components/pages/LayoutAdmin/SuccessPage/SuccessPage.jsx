@@ -16,7 +16,6 @@ const SuccessPage = () => {
   const location = useSelector((state) => state.filters.location);
   const currency = useSelector((state) => state.filters.currency);
   const piInfo = useSelector((state) => state.pi.piInfo);
-  console.log(piInfo);
   const products = useSelector((state) => state.cart.cart);
 
   const res = Object.entries(piInfo).map(([name, obj]) => ({ name, ...obj }));
@@ -150,7 +149,7 @@ const SuccessPage = () => {
                       <p className={colorByStatus(piInfo.date)}>{piInfo.date}</p>
                     </div>
                   </div>
-                       <div className="col-lg-6 col-md-12">
+                  <div className="col-lg-6 col-md-12">
                     <div className="summary-item">
                       <strong>PI Number </strong>
                       <p className={colorByStatus(piInfo.invoiceNo)}>{piInfo.invoiceNo}</p>
@@ -159,7 +158,7 @@ const SuccessPage = () => {
                   <div className="col-lg-6 col-md-12">
                     <div className="summary-item">
                       <strong>Notes </strong>
-                      <p >{piInfo.note}</p>
+                      <p>{piInfo.note}</p>
                     </div>
                   </div>
                   {/* <div className="col-lg-6 col-md-12">

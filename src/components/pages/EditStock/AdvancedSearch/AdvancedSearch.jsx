@@ -15,14 +15,11 @@ function AdvancedSearch({ closeModal, modalIsOpen, products, setFilteredProducts
 
   const applyDateRangeFilter = (products) => {
     if (startDate && endDate) {
-      let filteredProducts = products.filter((item) =>
-        item.bl.some((bl) => new Date(bl.date) >= new Date(startDate) && new Date(bl.date) <= new Date(endDate))
-      );
+      let filteredProducts = products.filter((item) => item.bl.some((bl) => new Date(bl.date) >= new Date(startDate) && new Date(bl.date) <= new Date(endDate)));
       setFilteredProducts(filteredProducts);
     } else if (startDate) {
       let filteredProducts = products.filter((item) => item.bl.some((bl) => new Date(bl.date) >= new Date(startDate)));
       setFilteredProducts(filteredProducts);
-      console.log(filteredProducts);
     } else if (endDate) {
       let filteredProducts = products.filter((item) => item.bl.some((bl) => new Date(bl.date) <= new Date(endDate)));
       setFilteredProducts(filteredProducts);
@@ -32,24 +29,16 @@ function AdvancedSearch({ closeModal, modalIsOpen, products, setFilteredProducts
 
   let subtitle;
   return (
-    <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      className="new_Modal"
-      overlayClassName="new_Overlay"
-      contentLabel="Example Modal"
-      ariaHideApp={false}
-    >
+    <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="new_Modal" overlayClassName="new_Overlay" contentLabel="Example Modal" ariaHideApp={false}>
       {" "}
       <button class="btn-close close__button" onClick={closeModal}></button>
       <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Advanced Search</h2>
       <div className="date_filter">
         <div className="label_div">Date : </div>
-        <div className="label_div">From : </div> <ReactDatePicker showIcon selected={startDate} onChange={(date) => setStartDate(date)} />{" "}
-        <div className="label_div"> To : </div>
+        <div className="label_div">From : </div> <ReactDatePicker showIcon selected={startDate} onChange={(date) => setStartDate(date)} /> <div className="label_div"> To : </div>
         <ReactDatePicker className="date_picker_style" showIcon selected={endDate} onChange={(date) => setEndDate(date)} />{" "}
       </div>
-      <input type="text" className="new_task_text" placeholder="add new Project here"  autocomplete="on" onChange={(e) => console.log(e.target.value)}/>
+      <input type="text" className="new_task_text" placeholder="add new Project here" autocomplete="on" onChange={(e) => console.log(e.target.value)} />
       <div className="add_proj" onClick={() => applyDateRangeFilter(products)}>
         Show Results{" "}
       </div>

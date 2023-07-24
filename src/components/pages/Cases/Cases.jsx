@@ -99,7 +99,6 @@ export const Cases = () => {
       });
   };
   const UploadFile = (type, file) => {
-    console.log(file);
     if (file) {
       const formData = new FormData();
       formData.append("caseName", currentCase.caseName);
@@ -109,7 +108,6 @@ export const Cases = () => {
       axios
         .patch(`${BASE_URL}/archive/${currentCase._id}`, formData)
         .then((response) => {
-          console.log(response.data);
           setRefresh((prev) => !prev);
           setCurrentCase(response.data);
           showToastMessage("File Updated Successfuly", ToastType.Success);
@@ -262,7 +260,7 @@ export const Cases = () => {
       </div>
       {/* modal for upload pdfs */}
       {currentCase && (
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">

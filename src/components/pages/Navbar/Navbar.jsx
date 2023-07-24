@@ -11,7 +11,7 @@ export const Navbar = () => {
   };
   const redirectRoute = () => {
     if (roles.includes(Roles.Admin)) {
-      navigate("/user/makepo");
+      navigate("/user/products");
     } else if (roles.includes(Roles.Logistic)) {
       navigate("/add-case");
     } else if (roles.includes(Roles.Archiver)) {
@@ -73,7 +73,7 @@ export const Navbar = () => {
                 </Link>
               </>
             )}
-            {roles.includes(Roles.Admin) && (
+            {(roles.includes(Roles.Admin || Roles.SuperAdmin) || roles.includes(Roles.SuperAdmin)) && (
               <>
                 <Link to="/add-case">
                   <a className="dropdown-item">

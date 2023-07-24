@@ -17,7 +17,6 @@ const Products = ({ searchQuery }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
-  console.log(products);
 
   const isLoading = useSelector((state) => state.show.isLoading);
   const cart = useSelector((state) => state.cart.cart);
@@ -96,9 +95,7 @@ const Products = ({ searchQuery }) => {
     let currentItems = products.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(products.length / itemsPerPage);
     const handlePageClick = (event) => {
-      console.log("Clicked");
       const newOffset = (event.selected * itemsPerPage) % products.length;
-      console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
       setItemOffset(newOffset);
       dispatch(setOffset(newOffset));
     };

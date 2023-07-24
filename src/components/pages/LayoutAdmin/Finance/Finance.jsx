@@ -32,7 +32,6 @@ const Finance = () => {
 
   const handleRejectMessage = (event) => {
     event.preventDefault();
-    console.log(event.target.rej_msg.value);
     //const id = currentPi._id;
     // dispatch(updateProformaInvoiceStatus({id, newStatus : 'Rejected' , managerMessage : event.target.rej_msg.value ,  manager : username}))
     setPopupClass("form-popup hidden");
@@ -41,7 +40,6 @@ const Finance = () => {
   /* -------------------------------------------------------------------------- */
 
   /* ------------------------------- searchQuery ------------------------------ */
-  console.log(filter);
 
   const handleSearchQueryChange = (e) => {
     setSearchQuery(e.target.value);
@@ -72,7 +70,7 @@ const Finance = () => {
       .then((response) => {
         dispatch(updateSignedProformaInvoiceStatus({ id, status: "BOOKED" }));
 
-        console.log(response.data); q
+        console.log(response.data); 
       })
       .catch((error) => {
         console.log(error);
@@ -83,8 +81,6 @@ const Finance = () => {
       .patch(`${BASE_URL}/stock/book/${id}`)
       .then((response) => {
         dispatch(updateSignedProformaInvoiceStatus({ id, status: "BOOKED" }));
-
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -98,8 +94,6 @@ const Finance = () => {
       .patch(`${BASE_URL}/stock/unbook/${id}`)
       .then((response) => {
         dispatch(updateSignedProformaInvoiceStatus({ id, status: "CONFIRMED" }));
-
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -139,20 +133,18 @@ const Finance = () => {
         <SearchBox onChange={handleSearchQueryChange}></SearchBox>
         <DropDownSelect onChange={handleFilterChange} options={options} />
       </div> */}
-      
 
-          {/* this is search section  */}
-            <div className="search_container">
-              <div className="row">
-                <div className="col-lg-6 col-md12">
-                  <SearchBox onChange={handleSearchQueryChange}></SearchBox>
-                </div>
-                <div className="col-lg-6 col-md12">
-                  <DropDownSelect onChange={handleFilterChange} options={options} />
-                </div>
-              </div>
-            </div>
-
+      {/* this is search section  */}
+      <div className="search_container">
+        <div className="row">
+          <div className="col-lg-6 col-md12">
+            <SearchBox onChange={handleSearchQueryChange}></SearchBox>
+          </div>
+          <div className="col-lg-6 col-md12">
+            <DropDownSelect onChange={handleFilterChange} options={options} />
+          </div>
+        </div>
+      </div>
 
       <div className="finance-tabel">
         <table className="pi__table table table-bordered">
@@ -186,25 +178,26 @@ const Finance = () => {
                 </td>
                 <td>
                   <div className="buttons-finance">
-                  <button
-                    className={`ags-btn-sucess-fill  ${proformaInvoice.status !== "CONFIRMED" ? "disabled_booked" : ""}`}
-                    onClick={() => handleBookClick(proformaInvoice.pi_id)} >
-                    Book
-                  </button>
-                  <button
-                    className={`ags-btn-main-fill  ${proformaInvoice.status !== "BOOKED" ? "disabled_booked" : ""}`}
-                    onClick={() => handleUnBookClick(proformaInvoice.pi_id)}
-                  >
-                    Unbook
-                  </button>
-                  <button
-                    className="ags-btn-main"
-                    onClick={() => {
-                      handleReject(proformaInvoice.pi_id);
-                    }}
-                  >
-                    Reject
-                  </button>
+                    <button
+                      className={`ags-btn-sucess-fill  ${proformaInvoice.status !== "CONFIRMED" ? "disabled_booked" : ""}`}
+                      onClick={() => handleBookClick(proformaInvoice.pi_id)}
+                    >
+                      Book
+                    </button>
+                    <button
+                      className={`ags-btn-main-fill  ${proformaInvoice.status !== "BOOKED" ? "disabled_booked" : ""}`}
+                      onClick={() => handleUnBookClick(proformaInvoice.pi_id)}
+                    >
+                      Unbook
+                    </button>
+                    <button
+                      className="ags-btn-main"
+                      onClick={() => {
+                        handleReject(proformaInvoice.pi_id);
+                      }}
+                    >
+                      Reject
+                    </button>
                   </div>
                 </td>
                 {/* <td>

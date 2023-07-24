@@ -5,9 +5,7 @@ import SignedProformaInvoices from "./SignedProformaInvoices/SignedProformaInvoi
 import { Link } from "react-router-dom";
 import "./Orders.css";
 
-
 const Orders = () => {
-  console.log('orderssssssssssssssssssss');
   let pageContent = <ProformaInvoiceOrders />;
   const [page, setPage] = useState("orders");
   switch (page) {
@@ -51,6 +49,6 @@ const Orders = () => {
       {pageContent}
     </div>
   );
-}
+};
 
 export default Orders;

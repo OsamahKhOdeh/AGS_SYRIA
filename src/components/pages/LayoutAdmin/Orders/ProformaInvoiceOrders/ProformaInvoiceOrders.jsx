@@ -13,7 +13,6 @@ import ProformaInvoice from "../../PoformaInvoice/ProformaInvoice";
 import useAuth from "../../../../../hooks/useAuth";
 import { getEmployeeProformaInvoicesAction, updateProformaInvoiceStatus } from "../../../../../actions/proformaInvoice";
 
-
 // Define a function that takes a date as an argument
 // and returns a string that represents how long ago the date was
 export const timeAgo = (date) => {
@@ -50,7 +49,6 @@ export const timeAgo = (date) => {
 };
 
 const ProformaInvoiceOrders = () => {
-  console.log('performaaaaaaaaaaaaaaaa');
   const [isPdf, setIsPdf] = useState(false);
   const [currentPi, setCurrentPi] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -90,9 +88,7 @@ const ProformaInvoiceOrders = () => {
   }, [dispatch, username]);
 
   let proformaInvoices = useSelector((state) => state.proformaInvoices.proformaInvoices);
-  console.log(proformaInvoices);
   /* ------------------------------- searchQuery ------------------------------ */
-  console.log(filter);
 
   const handleSearchQueryChange = (e) => {
     setSearchQuery(e.target.value);
@@ -128,7 +124,6 @@ const ProformaInvoiceOrders = () => {
   const handlePDF = (pi) => {
     setCurrentPi(pi);
     setIsPdf(true);
-    console.log(isPdf);
   };
   if (isPdf) {
     return (
@@ -240,7 +235,7 @@ const ProformaInvoiceOrders = () => {
                                 {proformaInvoice.managerApproval === "Rejected" && "Sales Manger :"}
                                 {proformaInvoice?.managerMessage}
                               </p>
-                                <button className="ags-btn-approve" onClick={() => navigate(`/user/editpi/${proformaInvoice._id}`)}>
+                              <button className="ags-btn-approve" onClick={() => navigate(`/user/editpi/${proformaInvoice._id}`)}>
                                 <i class="uil uil-edit"></i>{" "}
                               </button>
                             </>
@@ -361,26 +356,26 @@ const ProformaInvoiceOrders = () => {
             <thead>
               <tr className="th_style">
                 <th scope="col">
-                  <div >#</div>
+                  <div>#</div>
                 </th>
                 <th scope="col">
-                  <div >Employee</div>
+                  <div>Employee</div>
                 </th>
                 <th scope="col">
-                  <div >Date/Time</div>
+                  <div>Date/Time</div>
                 </th>
                 <th scope="col">
-                  <div >Customer</div>
+                  <div>Customer</div>
                 </th>
 
                 <th scope="col">
-                  <div >From manager</div>
+                  <div>From manager</div>
                 </th>
                 {/* <th scope="col">
                   <div >Signed by Customer</div>
                 </th> */}
                 <th scope="col">
-                  <div >Status</div>
+                  <div>Status</div>
                 </th>
               </tr>
             </thead>
@@ -388,18 +383,16 @@ const ProformaInvoiceOrders = () => {
               {proformaInvoices.map((proformaInvoice, index) => (
                 <tr className={index % 2 === 0 ? `tr_border` : `tr_border tr_dark`} key={index}>
                   <td>
-                    <div  >
-                      {proformaInvoice.pi_no}
-                    </div>
+                    <div>{proformaInvoice.pi_no}</div>
                   </td>
                   <td>
-                    <div >{proformaInvoice.employee}</div>
+                    <div>{proformaInvoice.employee}</div>
                   </td>
                   <td>
-                    <div >{timeAgo(new Date(proformaInvoice.createdAt))}</div>
+                    <div>{timeAgo(new Date(proformaInvoice.createdAt))}</div>
                   </td>
                   <td>
-                    <div >{proformaInvoice.buyer_address}</div>
+                    <div>{proformaInvoice.buyer_address}</div>
                   </td>
                   <td>
                     <div className="edit-pi-column">
@@ -418,7 +411,6 @@ const ProformaInvoiceOrders = () => {
                             {proformaInvoice.managerApproval === "Rejected" && "Sales Manger :"}
                             {proformaInvoice?.managerMessage}
                           </p>
-                        
                         </>
                       ) : (
                         <>

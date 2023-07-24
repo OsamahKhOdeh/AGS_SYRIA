@@ -37,7 +37,6 @@ function UploadPdf({ pi, setLoading }) {
   const dispatch = useDispatch();
   const handleFileChange = (event) => {
     setPdfFile(event.target.files[0]);
-    console.log(pdfFile);
   };
 
   const handleSubmit = (event) => {
@@ -57,7 +56,6 @@ function UploadPdf({ pi, setLoading }) {
       .then((response) => {
         setLoading(false);
         showToastMessage("file uploaded successfully", "success");
-        console.log("PDF file uploaded successfully");
         setPdfFile({});
       })
       .catch((error) => {

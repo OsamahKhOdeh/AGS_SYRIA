@@ -12,9 +12,7 @@ import LoadingSpinner from "../LayoutAdmin/LoadingSpinner/LoadingSpinner";
 const WebsitePage = () => {
   let location = useLocation();
   const navigate = useNavigate();
-  React.useEffect(() => {
-    console.log(location);
-  }, [location]);
+  React.useEffect(() => {}, [location]);
   const showNav = location.pathname === "/website";
 
   const dispatch = useDispatch();

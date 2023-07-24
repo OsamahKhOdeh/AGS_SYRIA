@@ -14,11 +14,9 @@ export const proformaInvoicesSlice = createSlice({
     },
     fetchAllProformaInvoices: (state, action) => {
       const data = action.payload;
-      console.log(data);
       state.proformaInvoices = data;
     },
     changeProformaInvoiceStatus: (state, action) => {
-      console.log(action.payload);
       state.proformaInvoices.map((proformaInvoice) => {
         if (proformaInvoice._id === action.payload.id) {
           if (action.payload.financiaApproval) {
@@ -47,13 +45,11 @@ export const proformaInvoicesSlice = createSlice({
     },
     changeSignedProformaInvoiceStatus: (state, action) => {
       const status = action.payload.status;
-      console.log(action.payload);
       state.proformaInvoices.map((proformaInvoice) => {
         if (proformaInvoice.pi_id === action.payload.id) {
           proformaInvoice.status = status;
           proformaInvoice.pi_done_status.push(status);
         } else {
-          console.log("not changed status");
         }
       });
     },

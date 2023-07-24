@@ -74,7 +74,6 @@ const PaymentsModal = ({ pi }) => {
       .then((response) => {
         setData(response.data);
         setIsLoading(false);
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);

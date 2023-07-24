@@ -15,7 +15,15 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { warehouses } from "../../data";
 import AdvancedSearch from "./AdvancedSearch/AdvancedSearch";
-import { getProducts, updateProductMoveToAvailable, updateProductMoveToComing, updateProductStock, updateProductWarehouseBlBookedQty, updateProductWarehouseBlQty, updateStock } from "../../../actions/products";
+import {
+  getProducts,
+  updateProductMoveToAvailable,
+  updateProductMoveToComing,
+  updateProductStock,
+  updateProductWarehouseBlBookedQty,
+  updateProductWarehouseBlQty,
+  updateStock,
+} from "../../../actions/products";
 
 function StockInput(props) {
   const { username } = useAuth();
@@ -87,14 +95,7 @@ function NewBL({ id, property, productCode, brand, capacity }) {
             <div className="container_val_x">
               <div className="header_div">Qty</div>
               <div className="value_div">
-                <input
-                  value={qty}
-                  onChange={(e) => setQty(e.target.value)}
-                  className="bl_val_input bl_qty"
-                  type="number"
-                  autocomplete="on"
-                  step="any"
-                ></input>{" "}
+                <input value={qty} onChange={(e) => setQty(e.target.value)} className="bl_val_input bl_qty" type="number" autocomplete="on" step="any"></input>{" "}
               </div>
             </div>
 
@@ -136,20 +137,12 @@ function NewBL({ id, property, productCode, brand, capacity }) {
             <div className="column_div">
               <div className="header_div">BL/Code</div>
               <div className="value_div">
-                <input
-                  value={blCode}
-                  onChange={(e) => setBlCode(e.target.value)}
-                  autocomplete="on"
-                  className="bl_val_input"
-                  type="text"
-                ></input>{" "}
+                <input value={blCode} onChange={(e) => setBlCode(e.target.value)} autocomplete="on" className="bl_val_input" type="text"></input>{" "}
               </div>
             </div>
           )}{" "}
           <div className="column_div">
-            <div className="header_div">
-              {property === "coming" ? "Expected arrival BL/Date" : property === "production" ? "Ex/Prod Finish Date" : "BL/Date"}
-            </div>
+            <div className="header_div">{property === "coming" ? "Expected arrival BL/Date" : property === "production" ? "Ex/Prod Finish Date" : "BL/Date"}</div>
             <div className="value_div">
               <DatePicker showIcon selected={blDate} onChange={(date) => setBlDate(date)} />{" "}
             </div>
@@ -207,13 +200,7 @@ function MoveToComingForm(props) {
           <div className="column_div">
             <div className="header_div">BL/Code</div>
             <div className="value_div">
-              <input
-                value={blCode}
-                onChange={(e) => setBlCode(e.target.value)}
-                autocomplete="on"
-                className="bl_val_input"
-                type="text"
-              ></input>{" "}
+              <input value={blCode} onChange={(e) => setBlCode(e.target.value)} autocomplete="on" className="bl_val_input" type="text"></input>{" "}
             </div>
           </div>
           <div className="column_div">
@@ -288,13 +275,12 @@ function MoveToAvailableForm(props) {
 }
 
 function ProductWareHouseBlQty(props) {
-  const [qty, setQty] = useState(props.property !== "booked" ? parseInt( props.bl?.qty - props.bl?.booked) : props.bl?.booked);
+  const [qty, setQty] = useState(props.property !== "booked" ? parseInt(props.bl?.qty - props.bl?.booked) : props.bl?.booked);
 
   useEffect(() => {
     setQty(props.property !== "booked" ? props.bl?.qty - props.bl?.booked : props.bl?.booked);
   }, [props.bl?.booked, props.bl?.qty, props.property]);
   const handleQtyChange = async () => {
-    console.log(props.bl);
     await props.handleQtyChange({
       qty: qty,
       code: props.bl?.code,
@@ -320,13 +306,9 @@ function ProductWareHouseBlQty(props) {
           value={qty}
           onChange={(e) => setQty(e.target.value)}
           onBlur={handleQtyChange}
-          disabled={
-            (props.warehouse === "coming" && props?.td === "coming") || (props.warehouse === "production" && props?.td === "production")
-          }
+          disabled={(props.warehouse === "coming" && props?.td === "coming") || (props.warehouse === "production" && props?.td === "production")}
         />
-        {props.warehouse === "coming" && props?.td === "coming" && (
-          <MoveToAvailableForm id={props.id} bl={props.bl} warehouse={props.warehouse}></MoveToAvailableForm>
-        )}
+        {props.warehouse === "coming" && props?.td === "coming" && <MoveToAvailableForm id={props.id} bl={props.bl} warehouse={props.warehouse}></MoveToAvailableForm>}
         {props.warehouse === "production" && props?.td === "production" && <MoveToComingForm id={props.id} qty={qty}></MoveToComingForm>}
       </div>
     </div>
@@ -349,8 +331,6 @@ function ProductWareHouseBl(props) {
   }, [props.item.bl]);
 
   const handleQtyChange = (value) => {
-    console.log(props.item);
-    console.log({ ...value, warehouse: props.item?.warehouse });
     props.handleWarhouseBlQtyChange({ ...value, warehouse: props.item?.warehouse });
   };
   return (
@@ -429,8 +409,6 @@ function ProductRow(props) {
   }, [props?.item?.bl]);
 
   const handleTotalStockClick = () => {
-    console.log(available);
-    console.log(coming);
     setShowStockDetails((prevShow) => !prevShow);
   };
   const handleTotalBookedClick = () => {
@@ -444,7 +422,6 @@ function ProductRow(props) {
   };
   const dispatch = useDispatch();
   const handleProductWarhouseBlQtyChange = (value) => {
-    console.log({ ...value, id: props.item._id });
     if (value.property !== "booked") {
       dispatch(updateProductWarehouseBlQty(props.item._id, value));
     } else {
@@ -525,24 +502,12 @@ function ProductRow(props) {
               </div>
               {/*            <StockInput updateKey={props.updateKey} property={"stock"} id={props.item._id} stock={props.item?.stock}></StockInput>
                */}{" "}
-              <NewBL
-                id={props.item._id}
-                property="available"
-                productCode={props.item.code}
-                brand={props.item.brand}
-                capacity={props.item.capacity}
-              ></NewBL>
+              <NewBL id={props.item._id} property="available" productCode={props.item.code} brand={props.item.brand} capacity={props.item.capacity}></NewBL>
               {showStockDetails && (
                 <div className="warehouses">
                   {available &&
                     available.map((item, index) => {
-                      return (
-                        <ProductWareHouseBl
-                          key={index}
-                          item={item}
-                          handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}
-                        ></ProductWareHouseBl>
-                      );
+                      return <ProductWareHouseBl key={index} item={item} handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}></ProductWareHouseBl>;
                     })}
                 </div>
               )}
@@ -561,13 +526,7 @@ function ProductRow(props) {
               </div>
               {/*            <StockInput updateKey={props.updateKey} property={"stock"} id={props.item._id} stock={props.item?.stock}></StockInput>
                */}{" "}
-              <NewBL
-                id={props.item._id}
-                property="coming"
-                productCode={props.item.code}
-                brand={props.item.brand}
-                capacity={props.item.capacity}
-              ></NewBL>
+              <NewBL id={props.item._id} property="coming" productCode={props.item.code} brand={props.item.brand} capacity={props.item.capacity}></NewBL>
               {showComing && (
                 <div className="warehouses">
                   {coming &&
@@ -604,25 +563,11 @@ function ProductRow(props) {
                 <div className="warehouses">
                   {available &&
                     available.map((item, index) => {
-                      return (
-                        <ProductWareHouseBl
-                          property={"booked"}
-                          key={index}
-                          item={item}
-                          handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}
-                        ></ProductWareHouseBl>
-                      );
+                      return <ProductWareHouseBl property={"booked"} key={index} item={item} handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}></ProductWareHouseBl>;
                     })}
                   {coming &&
                     coming.map((item, index) => {
-                      return (
-                        <ProductWareHouseBl
-                          property={"booked"}
-                          key={index}
-                          item={item}
-                          handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}
-                        ></ProductWareHouseBl>
-                      );
+                      return <ProductWareHouseBl property={"booked"} key={index} item={item} handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}></ProductWareHouseBl>;
                     })}
                 </div>
               )}
@@ -641,13 +586,7 @@ function ProductRow(props) {
               </div>
               {/*            <StockInput updateKey={props.updateKey} property={"stock"} id={props.item._id} stock={props.item?.stock}></StockInput>
                */}{" "}
-              <NewBL
-                id={props.item._id}
-                property="production"
-                productCode={props.item.code}
-                brand={props.item.brand}
-                capacity={props.item.capacity}
-              ></NewBL>
+              <NewBL id={props.item._id} property="production" productCode={props.item.code} brand={props.item.brand} capacity={props.item.capacity}></NewBL>
               {showUnderProd && (
                 <div className="warehouses">
                   {production &&
@@ -718,7 +657,6 @@ const EditStock = () => {
   if (filter.length > 0 && searchQuery.length > 0) {
     if (filter === "bl-code") {
       products = products.filter((item) => item.bl.some((bl) => bl.code.includes(searchQuery.toLowerCase())));
-      console.log(products);
     } else if (filter === "warehouse") {
       products = products.filter((item) => item.bl.some((bl) => bl.warehouse.includes(searchQuery.toLowerCase())));
     } else {
@@ -771,7 +709,6 @@ const EditStock = () => {
   const handleSetFilteredProducts = (prods) => {
     setShowFiltered(true);
     setFilteredProducts(prods);
-    console.log(prods);
   };
 
   return (
@@ -780,12 +717,7 @@ const EditStock = () => {
         <SearchBox onChange={handleSearchQueryChange}></SearchBox>
         <DropDownSelect onChange={handleFilterChange} options={options} />
         <div onClick={() => openModal()}>Advanced Search</div>
-        <AdvancedSearch
-          products={products}
-          modalIsOpen={modalIsOpen}
-          closeModal={closeModal}
-          setFilteredProducts={handleSetFilteredProducts}
-        />
+        <AdvancedSearch products={products} modalIsOpen={modalIsOpen} closeModal={closeModal} setFilteredProducts={handleSetFilteredProducts} />
         <div className="choose_cols">
           {cols.map((colName) => (
             <label>
@@ -800,62 +732,58 @@ const EditStock = () => {
           <tr>
             {selectedOptions.includes("image") && (
               <th className="th_medium th_fixed" scope="col">
-                <div >Image</div>
+                <div>Image</div>
               </th>
             )}
 
             {selectedOptions.includes("brand") && (
               <th className="th_small th_fixed" scope="col">
-                <div >Brand</div>
+                <div>Brand</div>
               </th>
             )}
             {selectedOptions.includes("code") && (
               <th className="th_small th_fixed" scope="col">
-                <div >Code</div>
+                <div>Code</div>
               </th>
             )}
 
             {selectedOptions.includes("total") && (
               <th className="th_small th_fixed" scope="col">
-                <div >Total</div>
+                <div>Total</div>
               </th>
             )}
             {selectedOptions.includes("available") && (
               <th className="th_large th_fixed " scope="col">
-                <div >Available</div>
+                <div>Available</div>
               </th>
             )}
 
             {selectedOptions.includes("coming") && (
               <th className="th_large th_fixed" style={{ width: "175px" }} scope="col">
-                <div > Coming</div>
+                <div> Coming</div>
               </th>
             )}
             {selectedOptions.includes("booked") && (
               <th className="th_large th_fixed" scope="col">
-                <div >Booked</div>
+                <div>Booked</div>
               </th>
             )}
             {selectedOptions.includes("production") && (
               <th className="th_large th_fixed" style={{ width: "175px" }} scope="col">
-                <div > Under Production</div>
+                <div> Under Production</div>
               </th>
             )}
             {selectedOptions.includes("update") && (
               <th className="th_small th_fixed" scope="col">
-                <div > Last Upadte(by)</div>
+                <div> Last Upadte(by)</div>
               </th>
             )}
           </tr>
         </thead>
         <tbody>
           {!showFiltered
-            ? products.map((item, index) => (
-                <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>
-              ))
-            : filteredProducts.map((item, index) => (
-                <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>
-              ))}
+            ? products.map((item, index) => <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>)
+            : filteredProducts.map((item, index) => <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>)}
         </tbody>
       </table>
     </div>

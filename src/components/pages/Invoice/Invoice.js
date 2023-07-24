@@ -2,14 +2,7 @@ import React from "react";
 import InvoiceTitle from "./InvoiceTitle";
 import InvoiceTerms from "./InvoiceTerms";
 import InvoiceInfo from "./InvoiceInfo";
-import {
-  Page,
-  Document,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
+import { Page, Document, Image, StyleSheet, Text, View } from "@react-pdf/renderer";
 import InvoiceItemsTable from "./InvoiceItemsTable";
 import logo_ags from "./logo_ags.png";
 import logo_ajc from "./logo_ajc.png";
@@ -60,14 +53,9 @@ const styles = StyleSheet.create({
 });
 
 const Invoice = ({ pi, currency, location, usdToAedRate }) => {
-  console.log("🚀 ~ file: Invoice.js:62 ~ Invoice ~ pi:", pi.piInfo);
   let logo = logo_ags;
   let stamp = ags_stamp;
-  console.log(location);
-  if (
-    pi.piInfo.exporter ===
-    "ABDULJALIL CHHADA AUTO SPARE PARTS TRADING LLC DEIRA NAIF, AL MAKTOUM HOSPITAL ROAD    CONTACT:+971 558952656,   Email: info@jalil.ae"
-  ) {
+  if (pi.piInfo.exporter === "ABDULJALIL CHHADA AUTO SPARE PARTS TRADING LLC DEIRA NAIF, AL MAKTOUM HOSPITAL ROAD    CONTACT:+971 558952656,   Email: info@jalil.ae") {
     logo = logo_ajc;
     stamp = ajc_stamp;
   }
@@ -75,13 +63,7 @@ const Invoice = ({ pi, currency, location, usdToAedRate }) => {
   return (
     <Document compress={true}>
       <Page size="A4" style={styles.page}>
-        <Text
-          style={styles.pageNumber}
-          render={({ pageNumber, totalPages }) =>
-            `page ${pageNumber} of ${totalPages}`
-          }
-          fixed
-        />
+        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `page ${pageNumber} of ${totalPages}`} fixed />
         <Image style={styles.logo} src={logo} />
         <InvoiceTitle title="PROFORMA INVOICE" />
         <InvoiceInfo piInfo={pi.piInfo} />
@@ -106,16 +88,12 @@ const Invoice = ({ pi, currency, location, usdToAedRate }) => {
         />
         <BankDetails bankDetails={pi.piInfo.bankDetails} />
         <View wrap={false}>
-          <SellerBuyer
-            exporter={pi.piInfo.exporter}
-            buyer={pi.piInfo.buyerAdress}
-          />
+          <SellerBuyer exporter={pi.piInfo.exporter} buyer={pi.piInfo.buyerAdress} />
           <Image style={styles.logo} src={stamp} />
         </View>
         <Text style={styles.salesEngineer}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sales Engineer : &nbsp;
-          {pi.piInfo.employee}&nbsp;&nbsp;&nbsp;&nbsp; Phone Number :{" "}
-          {pi.piInfo.employeePhone}{" "}
+          {pi.piInfo.employee}&nbsp;&nbsp;&nbsp;&nbsp; Phone Number : {pi.piInfo.employeePhone}{" "}
         </Text>
       </Page>
     </Document>

@@ -25,7 +25,6 @@ const StatusSelect = ({ pi }) => {
   };
 
   const handleNextStage = () => {
-    console.log("ggg");
     dispatch(updateSignedProformaInvoiceStatus({ id: pi.pi_id }));
     dispatch(changeSignedProformaInvoiceStatus({ id: pi.pi_id }));
   };

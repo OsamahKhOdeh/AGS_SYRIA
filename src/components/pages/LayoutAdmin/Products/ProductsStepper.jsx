@@ -18,9 +18,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 const steps = ["Select Products", "Select PI Information", "Make and Download PI"];
 
 export default function ProductsStepper() {
-  console.log("this is stepper ");
   const navigate = useNavigate();
-  console.log(useSelector((state) => state));
   const piInfo = useSelector((state) => state.pi.piInfo);
   const piProducts = useSelector((state) => state.pi.piProducts);
   const cart = useSelector((state) => state.cart.cart);
@@ -46,7 +44,6 @@ export default function ProductsStepper() {
     ) {
       setCanNext(true);
     }
-    console.log(canNext);
   }, [
     canNext,
     piInfo.bankDetails,
@@ -195,9 +192,7 @@ export default function ProductsStepper() {
                         )
                       }
                       onClick={handleNext}
-                    >
-                      {console.log(canNext)} Send{" "}
-                    </button>
+                    ></button>
                   )}
                 </div>
               </>

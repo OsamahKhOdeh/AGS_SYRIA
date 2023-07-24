@@ -5,7 +5,6 @@ import { Roles } from "../Enum/Constants";
 import useAuth from "../../../hooks/useAuth";
 export const LayoutAdmin = () => {
   const { roles, username } = useAuth();
-  console.log(roles);
   const openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
   };
@@ -21,39 +20,18 @@ export const LayoutAdmin = () => {
             <i class="uil uil-angle-left-b"></i>
           </div>
         </a>
-        <a href="">
-          <Link to="/user/makepo" onClick={closeNav}>
-            Make PO
-          </Link>
-        </a>
-        <a href="">
-          <Link to="/user/orders" onClick={closeNav}>
-            Orders
-          </Link>
-        </a>
-        <a href="">
-          <Link to="/user/editItems" onClick={closeNav}>
-            Edit Products
-          </Link>
-        </a>
-        {roles.includes(Roles.Admin || Roles.Financial || Roles.SalesManager) && (
-          <a href="">
-            <Link to="/user/pis" onClick={closeNav}>
-              Show PI(s)
-            </Link>
-          </a>
-        )}
-        {roles.includes(Roles.Admin) && (
+        {roles.includes(Roles.SuperAdmin) && (
           <>
             <a href="">
-              <Link to="/user/editstock" onClick={closeNav}>
-                Edit Stock
+              <Link to="/user/makepo" onClick={closeNav}>
+                Make PO
               </Link>
             </a>
-          </>
-        )}
-        {roles.includes(Roles.Admin) && (
-          <>
+            <a href="">
+              <Link to="/user/editItems" onClick={closeNav}>
+                Edit Products
+              </Link>
+            </a>
             <a href="">
               <Link to="/user/exchange" onClick={closeNav}>
                 Exchange Rate
@@ -61,11 +39,34 @@ export const LayoutAdmin = () => {
             </a>
           </>
         )}
-        <a href="">
-          <Link to="/website" onClick={closeNav}>
-            Products
-          </Link>
-        </a>
+        {(roles.includes(Roles.Admin) || roles.includes(Roles.SuperAdmin) || roles.includes(Roles.Financial) || roles.includes(Roles.SalesManager)) && (
+          <>
+            <a href="">
+              <Link to="/user/pis" onClick={closeNav}>
+                Show PI(s)
+              </Link>
+            </a>
+            <a href="">
+              <Link to="/user/editstock" onClick={closeNav}>
+                Edit Stock
+              </Link>
+            </a>
+            <a href="">
+              <Link to="/user/orders" onClick={closeNav}>
+                Orders
+              </Link>
+            </a>
+            <a href="">
+              <Link to="/user/products" onClick={closeNav}>
+                Products
+              </Link>
+            </a>
+          </>
+        )}
+        {/* {roles.includes(Roles.Admin, Roles.SuperAdmin) && (
+      
+        )} */}
+
         {/* <a href="">
       <Link to="/admin/finance">Finance</Link>
     </a> */}

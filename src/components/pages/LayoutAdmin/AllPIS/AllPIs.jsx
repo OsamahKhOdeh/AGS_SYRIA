@@ -109,7 +109,6 @@ const AllPIs = () => {
   // console.log('roles',roles);
 
   /* ------------------------------- searchQuery ------------------------------ */
-  console.log(filter);
 
   const handleSearchQueryChange = (e) => {
     setSearchQuery(e.target.value);
@@ -158,14 +157,12 @@ const AllPIs = () => {
     dispatch(getProformaInvoicesAction());
   };
   const handleReject = (id) => {
-    console.log("rreject");
     setPopupClass("form-popup showing");
     //dispatch(updateProformaInvoiceStatus({id, newStatus : 'Rejected'}))
   };
 
   const handleRejectMessage = (event) => {
     event.preventDefault();
-    console.log(event.target.rej_msg.value);
     const id = currentPi._id;
     if (roles.includes("Financial")) {
       dispatch(
@@ -195,7 +192,6 @@ const AllPIs = () => {
   const handlePDF = (pi) => {
     setCurrentPi(pi);
     setIsPdf(true);
-    console.log(isPdf);
   };
 
   /* ------------------------------ Delete Modal ------------------------------ */
@@ -218,8 +214,6 @@ const AllPIs = () => {
       .patch(`${BASE_URL}/stock/book/${id}`)
       .then((response) => {
         //  dispatch(updateSignedProformaInvoiceStatus({ id, status: "BOOKED" }));
-
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -233,8 +227,6 @@ const AllPIs = () => {
       .patch(`${BASE_URL}/stock/unbook/${id}`)
       .then((response) => {
         dispatch(updateSignedProformaInvoiceStatus({ id, status: "CONFIRMED" }));
-
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -272,17 +264,22 @@ const AllPIs = () => {
             <Modal.Title>Delete PI</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h5>Are you sure you want to delete PI : <span className="required">{currentPi.pi_no}</span></h5>
-            <h5> for customer : <span className="required"> {currentPi.buyer_address} </span></h5>
+            <h5>
+              Are you sure you want to delete PI : <span className="required">{currentPi.pi_no}</span>
+            </h5>
+            <h5>
+              {" "}
+              for customer : <span className="required"> {currentPi.buyer_address} </span>
+            </h5>
           </Modal.Body>
           <Modal.Footer>
             <div className="buttons-modal">
-            <button className="ags-btn-main" onClick={handleClose}>
-              Close
-            </button>
-             <button className="ags-btn-main-fill" onClick={handleConfirmDelete}>
-              Delete
-            </button>
+              <button className="ags-btn-main" onClick={handleClose}>
+                Close
+              </button>
+              <button className="ags-btn-main-fill" onClick={handleConfirmDelete}>
+                Delete
+              </button>
             </div>
           </Modal.Footer>
         </Modal>
@@ -312,17 +309,17 @@ const AllPIs = () => {
             </div>
           </div>
         </>
-           {/* this is seach section in all show PI  */}
-          <div className="search_container">
-            <div className="row">
-              <div className="col-lg-6 col-md12">
-                <SearchBox onChange={handleSearchQueryChange}></SearchBox>
-              </div>
-              <div className="col-lg-6 col-md12">
-                <DropDownSelect onChange={handleFilterChange} options={options} />
-              </div>
+        {/* this is seach section in all show PI  */}
+        <div className="search_container">
+          <div className="row">
+            <div className="col-lg-6 col-md12">
+              <SearchBox onChange={handleSearchQueryChange}></SearchBox>
+            </div>
+            <div className="col-lg-6 col-md12">
+              <DropDownSelect onChange={handleFilterChange} options={options} />
             </div>
           </div>
+        </div>
         <div className="pi-list">
           {/* this is custom design only to Mobile  */}
           {proformaInvoices.map((proformaInvoice, index) => (
@@ -343,16 +340,8 @@ const AllPIs = () => {
                   </div>
                   <div class="box c">
                     <p className="text-secondary">Status</p>
-                    <h6
-                      className={`status-table-label ${colorByStatus(
-                        roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval
-                      )}`}
-                    >
-                      <i
-                        className={`uil uil-${iconByStatus(
-                          roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval
-                        )}`}
-                      ></i>
+                    <h6 className={`status-table-label ${colorByStatus(roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval)}`}>
+                      <i className={`uil uil-${iconByStatus(roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval)}`}></i>
                       {roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval}
                     </h6>
                   </div>
@@ -477,16 +466,8 @@ const AllPIs = () => {
                       <div className=" customer_cell">{proformaInvoice.buyer_address}</div>
                     </td>
                     <td>
-                      <div
-                        className={`status-table-label ${colorByStatus(
-                          roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval
-                        )}`}
-                      >
-                        <i
-                          className={`uil uil-${iconByStatus(
-                            roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval
-                          )}`}
-                        ></i>
+                      <div className={`status-table-label ${colorByStatus(roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval)}`}>
+                        <i className={`uil uil-${iconByStatus(roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval)}`}></i>
                         {roles.includes("Financial") ? proformaInvoice?.financiaApproval : proformaInvoice.managerApproval}
                       </div>
                     </td>
@@ -498,7 +479,7 @@ const AllPIs = () => {
                         </span>
                       </button>
                     </td>
-                    {roles.includes("Financial") && proformaInvoice.managerApproval !== "Approved"   ? (
+                    {roles.includes("Financial") && proformaInvoice.managerApproval !== "Approved" ? (
                       <td>
                         <div>Waiting for Sales M Approval</div>
                       </td>
@@ -569,9 +550,7 @@ const AllPIs = () => {
                         </div>
                       </td>
                     )}
-                    <td className={colorByUpdate(proformaInvoice.createdAt, proformaInvoice.updatedAt)}>
-                      {proformaInvoice.managerMessage}
-                    </td>
+                    <td className={colorByUpdate(proformaInvoice.createdAt, proformaInvoice.updatedAt)}>{proformaInvoice.managerMessage}</td>
                   </tr>
                 ))}
               </tbody>

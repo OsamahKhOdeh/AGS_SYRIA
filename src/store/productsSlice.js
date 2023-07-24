@@ -52,13 +52,11 @@ export const productsSlice = createSlice({
     updateProductStockState: (state, action) => {
       state.products.map((product) => {
         if (product._id === action.payload.id) {
-          product[action.payload.newStock.property] =
-            action.payload.newStock.value;
+          product[action.payload.newStock.property] = action.payload.newStock.value;
         }
       });
     },
     updateStockState: (state, action) => {
-      console.log(action.payload);
       state.products.map((product) => {
         if (product._id === action.payload.id) {
           product.bl = action.payload.data;
@@ -77,7 +75,6 @@ export const productsSlice = createSlice({
       state.itemOffset = action.payload;
     },
     fetchAll: (state, action) => {
-      console.log(action.payload);
       const { data } = action.payload;
       state.products = data;
     },
@@ -88,19 +85,13 @@ export const productsSlice = createSlice({
       state.products = data;
       for (var i = 0; i < state.products.length; i++) {
         //iterate through each object in an array
-        if (
-          JSON.stringify(state.products[i]) ===
-          JSON.stringify(checkforallbrands)
-        ) {
+        if (JSON.stringify(state.products[i]) === JSON.stringify(checkforallbrands)) {
           state.products = state.products.filter((item) => {
             return item._id !== "1";
           });
           state.allProducts = state.products;
           return;
-        } else if (
-          JSON.stringify(state.products[i]) ===
-          JSON.stringify(checkforallcountries)
-        ) {
+        } else if (JSON.stringify(state.products[i]) === JSON.stringify(checkforallcountries)) {
           state.products = state.products.filter((item) => {
             return item._id !== "2";
           });
@@ -115,14 +106,6 @@ export const productsSlice = createSlice({
   },
 });
 
-export const {
-  fetchAll,
-  fetchFilterd,
-  fetchFilterdUptoBrands,
-  setOffset,
-  deleteProductState,
-  updateProductStockState,
-  updateStockState,
-} = productsSlice.actions;
+export const { fetchAll, fetchFilterd, fetchFilterdUptoBrands, setOffset, deleteProductState, updateProductStockState, updateStockState } = productsSlice.actions;
 
 export default productsSlice.reducer;

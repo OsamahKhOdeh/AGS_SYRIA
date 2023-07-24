@@ -85,18 +85,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const InvoiceTableFooter = ({
-  products,
-  currency,
-  location,
-  discount,
-  additions,
-  usdToAedRate,
-  note,
-  documentCharges,
-  additionsDescription,
-  discountDescription,
-}) => {
+const InvoiceTableFooter = ({ products, currency, location, discount, additions, usdToAedRate, note, documentCharges, additionsDescription, discountDescription }) => {
   if (!documentCharges) {
     documentCharges = 0;
   }
@@ -141,44 +130,14 @@ const InvoiceTableFooter = ({
         word = tensOnes(D[4], D[3]) + high[1] + tensOnes(0, D[2]) + high[0] + tensOnes(D[1], D[0]) + currency_word + C;
         break;
       case 6:
-        word =
-          tensOnes(0, D[5]) +
-          high[0] +
-          tensOnes(D[4], D[3]) +
-          high[1] +
-          tensOnes(0, D[2]) +
-          high[0] +
-          tensOnes(D[1], D[0]) +
-          currency_word +
-          C;
+        word = tensOnes(0, D[5]) + high[0] + tensOnes(D[4], D[3]) + high[1] + tensOnes(0, D[2]) + high[0] + tensOnes(D[1], D[0]) + currency_word + C;
         break;
       case 7:
-        word =
-          tensOnes(0, D[6]) +
-          high[2] +
-          tensOnes(0, D[5]) +
-          high[0] +
-          tensOnes(D[4], D[3]) +
-          high[1] +
-          tensOnes(0, D[2]) +
-          high[0] +
-          tensOnes(D[1], D[0]) +
-          currency_word +
-          C;
+        word = tensOnes(0, D[6]) + high[2] + tensOnes(0, D[5]) + high[0] + tensOnes(D[4], D[3]) + high[1] + tensOnes(0, D[2]) + high[0] + tensOnes(D[1], D[0]) + currency_word + C;
         break;
       case 8:
         word =
-          tensOnes(D[7], D[6]) +
-          high[2] +
-          tensOnes(0, D[5]) +
-          high[0] +
-          tensOnes(D[4], D[3]) +
-          high[1] +
-          tensOnes(0, D[2]) +
-          high[0] +
-          tensOnes(D[1], D[0]) +
-          currency_word +
-          C;
+          tensOnes(D[7], D[6]) + high[2] + tensOnes(0, D[5]) + high[0] + tensOnes(D[4], D[3]) + high[1] + tensOnes(0, D[2]) + high[0] + tensOnes(D[1], D[0]) + currency_word + C;
         break;
       case 9:
         word =
@@ -252,7 +211,6 @@ const InvoiceTableFooter = ({
   let UAERATE = 1;
   let price = 0;
 
-  console.log(usdToAedRate);
   if (currency === "AED") {
     UAERATE = usdToAedRate;
   }
@@ -277,8 +235,6 @@ const InvoiceTableFooter = ({
     });
   }
   calcTotal();
-  console.log(total);
-  console.log(totalPcs);
   if (!additionsDescription) {
     additionsDescription = "";
   }

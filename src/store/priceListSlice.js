@@ -14,13 +14,10 @@ export const priceListSlice = createSlice({
       if (!existItem) {
         state.chosenProducts.push(action.payload);
       } else {
-        console.log("product already exists");
       }
     },
     removeFromPriceList: (state, action) => {
-      const filtered = state.chosenProducts.filter(
-        (item) => item._id !== action.payload._id
-      );
+      const filtered = state.chosenProducts.filter((item) => item._id !== action.payload._id);
       state.chosenProducts = filtered;
     },
   },

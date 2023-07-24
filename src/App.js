@@ -69,35 +69,35 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/login" element={<Login />}></Route>
-              <Route path="/website" element={<WebsitePage />}></Route>
               <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
                 <Route path="/" element={<Layout />}>
-                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Logistic]} />}>
+                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Logistic, Roles.Accounter]} />}>
                     <Route path="/add-case" element={<AddCase />}></Route>
                   </Route>
-                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Archiver]} />}>
+                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Archiver, Roles.Accounter]} />}>
                     <Route path="/cases" element={<Cases />}></Route>
                   </Route>
-                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Archiver]} />}>
+                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Archiver, Roles.Accounter]} />}>
                     <Route path="/history" element={<History />}></Route>
                   </Route>
-                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Accounter]} />}>
+                  <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Accounter, Roles.Accounter]} />}>
                     <Route path="/under-process" element={<UnderProcess />}></Route>
                   </Route>
                   <Route>
                     <Route path="/user" element={<LayoutAdmin />}>
-                      <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
-                        <Route index path="makepo" element={<ProductsStepper />}></Route>
-                        <Route path="orders" element={<Orders />}></Route>
-                      </Route>
-                      <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Financial, Roles.SalesManager]} />}>
+                      {/* <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}></Route> */}
+                      <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Archiver, Roles.Accounter, Roles.SuperAdmin]} />}>
                         <Route path="pis" element={<AllPIs />}></Route>
-                      </Route>
-                      <Route element={<RequireAuth allowedRoles={[Roles.Admin]} />}>
                         <Route path="editstock" element={<EditStock2 />}></Route>
-                        <Route path="exchange" element={<ExchangeRate />}></Route>
+                        <Route path="orders" element={<Orders />}></Route>
+                        <Route path="products" element={<WebsitePage />}></Route>
                       </Route>
-                      <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Sales]} />}>
+                      {/* <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}></Route> */}
+                      {/* <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Sales]} />}>
+                      </Route> */}
+                      <Route element={<RequireAuth allowedRoles={[Roles.SuperAdmin]} />}>
+                        <Route index path="makepo" element={<ProductsStepper />}></Route>
+                        <Route path="exchange" element={<ExchangeRate />}></Route>
                         <Route path="editItems" element={<EditItems />}></Route>
                       </Route>
                     </Route>

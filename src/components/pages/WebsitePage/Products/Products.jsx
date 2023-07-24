@@ -5,7 +5,6 @@ import ProductNew from "./Product/ProductNew";
 import LoadingSpinner from "../../LayoutAdmin/LoadingSpinner/LoadingSpinner";
 
 const Products = ({ searchQuery, category }) => {
-  console.log(category);
   let products = useSelector((state) => state.products.products);
   let allProducts = useSelector((state) => state.products.products);
   const isLoading = useSelector((state) => state.show.isLoading);

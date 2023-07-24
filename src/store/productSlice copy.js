@@ -13,7 +13,6 @@ export const productSlice = createSlice({
       if (!existItem) {
         state.products.push(action.payload);
       } else {
-        console.log("product already exists");
       }
     },
     removeProductFromCheckedList: (state, action) => {

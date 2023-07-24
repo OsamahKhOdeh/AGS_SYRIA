@@ -87,8 +87,6 @@ const PackingListOrders = () => {
 
   let packingLists = useSelector((state) => state.packingLists.packingLists);
   /* ------------------------------- searchQuery ------------------------------ */
-  console.log(filter);
-
   const handleSearchQueryChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -118,7 +116,6 @@ const PackingListOrders = () => {
     setIsFake(isFakeVal);
     setCurrentPkl(pkl);
     setIsPdf(true);
-    console.log(isPdf);
   };
   if (isPdf) {
     return (
@@ -241,24 +238,24 @@ const PackingListOrders = () => {
                   <thead>
                     <tr className="th_style">
                       <th scope="col">
-                        <div >#</div>
+                        <div>#</div>
                       </th>
                       <th scope="col">
-                        <div >Employee</div>
+                        <div>Employee</div>
                       </th>
                       <th scope="col">
-                        <div >Date/Time</div>
+                        <div>Date/Time</div>
                       </th>
                       <th scope="col">
-                        <div >Customer</div>
-                      </th>
-
-                      <th scope="col">
-                        <div >From manager</div>
+                        <div>Customer</div>
                       </th>
 
                       <th scope="col">
-                        <div >Status</div>
+                        <div>From manager</div>
+                      </th>
+
+                      <th scope="col">
+                        <div>Status</div>
                       </th>
                     </tr>
                   </thead>
@@ -295,11 +292,7 @@ const PackingListOrders = () => {
                               </div>
                             ) : pkl.managerApproval === "Rejected" ? (
                               <>
-                                <button
-                                  type="button"
-                                  className="button_edit_pdf button_edit"
-                                  onClick={() => navigate(`/user/editpi/${pkl._id}`)}
-                                >
+                                <button type="button" className="button_edit_pdf button_edit" onClick={() => navigate(`/user/editpi/${pkl._id}`)}>
                                   Edit
                                 </button>
                                 <p style={{ color: "red", padding: 0, margin: 0 }}>

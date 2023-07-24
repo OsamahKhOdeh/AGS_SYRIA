@@ -34,9 +34,7 @@ const Warranty = () => {
     setSearchQuery(e.target.value);
   };
 
-  const countriesProducts = useSelector(
-    (state) => state.products.productsForCountries
-  );
+  const countriesProducts = useSelector((state) => state.products.productsForCountries);
   let countries = [];
   countriesProducts.map((product) => {
     if (!countries.includes(product.country)) {
@@ -86,11 +84,8 @@ const Warranty = () => {
   let choosenBrands = [];
   let choosenCapacities = [];
 
-  function onAction(node, action) {
-    console.log("onAction::", action, node);
-  }
+  function onAction(node, action) {}
   const onChange = (currentNode, selectedNodes) => {
-    console.log("im the best in the world");
     //choosenCompanies = [];
     // choosenBrands = [];
     // choosenCapacities = [];
@@ -182,9 +177,7 @@ const Warranty = () => {
     const isALL = selectedItems.includes("All");
     const index = selectedItems.indexOf(item);
     if (item === "All") {
-      dispatch(
-        setFiltersState({ ...filters, countries: ["All"], brands: [""] })
-      );
+      dispatch(setFiltersState({ ...filters, countries: ["All"], brands: [""] }));
       setSelectedItems(["All"]);
       return;
     }
@@ -219,9 +212,7 @@ const Warranty = () => {
     const isALL = selectedCategories.includes("All");
     const index = selectedCategories.indexOf(item);
     if (item === "All") {
-      dispatch(
-        setFiltersState({ ...filters, categories: ["All"], brands: [""] })
-      );
+      dispatch(setFiltersState({ ...filters, categories: ["All"], brands: [""] }));
       setSelectedCategories(["All"]);
       return;
     }
@@ -287,12 +278,7 @@ const Warranty = () => {
                         <div className="filter__search">
                           {countries.map((item, i) => (
                             <>
-                              <CountryItem
-                                key={i}
-                                title={item}
-                                img={item.img}
-                                onClick={handleCountryChange}
-                              />
+                              <CountryItem key={i} title={item} img={item.img} onClick={handleCountryChange} />
                             </>
                           ))}
                         </div>

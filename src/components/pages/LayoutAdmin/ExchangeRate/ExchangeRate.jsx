@@ -23,7 +23,6 @@ export const ExchangeRate = () => {
         .get(`${BASE_URL}/currency`)
         .then(async (response) => {
           setExchangeRate(response.data);
-          console.log(exchangeRate);
         })
         .catch((error) => {
           console.error(error);
@@ -34,9 +33,7 @@ export const ExchangeRate = () => {
   const changeModeExchangeRate = (mode) => {
     exchangeRate.exchange_rate_mode = mode;
     let buffModel = { ...exchangeRate };
-    console.log("buffModel", buffModel);
     setExchangeRate(buffModel);
-    console.log(exchangeRate);
   };
   const updateExchange = () => {
     let model = {
@@ -44,7 +41,6 @@ export const ExchangeRate = () => {
       addition_on_exchange_rate: Number(exchangeRate.addition_on_exchange_rate),
       exchange_rate_to_usd_manual: Number(exchangeRate.exchange_rate_to_usd_manual),
     };
-    console.log(exchangeRate);
     axios
       .patch(`${BASE_URL}/currency/update`, model)
       .then((response) => {
@@ -160,7 +156,7 @@ export const ExchangeRate = () => {
             Large modal
           </button>
 
-          <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">...</div>
             </div>
@@ -170,7 +166,7 @@ export const ExchangeRate = () => {
             Small modal
           </button> */}
           {/* 
-          <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal fade bd-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">...</div>
             </div>
@@ -178,7 +174,7 @@ export const ExchangeRate = () => {
         </div>
       </div>
       {/* Change Exchange */}
-      <div class="modal fade" id="changeExchangeModal" tabindex="-1" role="dialog" aria-labelledby="changeExchangeModal" aria-hidden="true">
+      <div class="modal fade" id="changeExchangeModal" tabIndex="-1" role="dialog" aria-labelledby="changeExchangeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">

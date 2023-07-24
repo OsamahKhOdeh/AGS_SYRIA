@@ -10,7 +10,7 @@ import { FaCarBattery } from "react-icons/fa";
 // import ReactPaginate from "react-paginate";
 import { setOffset } from "../../../../../store/productsSlice";
 import { deletProductformCart, deleteAll } from "../../../../../store/cartSlice";
-const Products = ({ searchQuery}) => {
+const Products = ({ searchQuery }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
@@ -75,7 +75,7 @@ const Products = ({ searchQuery}) => {
     return (
       <div className="grid">
         {currentItems?.map((product, index) => (
-          <Product product={product} index={index}/>
+          <Product product={product} index={index} />
         ))}
       </div>
     );
@@ -157,8 +157,7 @@ const Products = ({ searchQuery}) => {
         ) : (
           products?.map((product, index) => (
             <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
-              {            console.log('ssssssssssssssssssssssssssssssssssssssssssss',product)}
-              <Product product={product}  index={index}  />
+              <Product product={product} index={index} />
             </Grid>
           ))
         )

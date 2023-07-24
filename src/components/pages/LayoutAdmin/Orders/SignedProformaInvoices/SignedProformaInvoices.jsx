@@ -89,7 +89,6 @@ const SignedProformaInvoices = () => {
   let proformaInvoices = useSelector((state) => state.proformaInvoices.proformaInvoices);
 
   /* ------------------------------- searchQuery ------------------------------ */
-  console.log(filter);
 
   const handleSearchQueryChange = (e) => {
     setSearchQuery(e.target.value);
@@ -125,7 +124,6 @@ const SignedProformaInvoices = () => {
   const handlePDF = (pi) => {
     setCurrentPi(pi);
     setIsPdf(true);
-    console.log(isPdf);
   };
   if (isPdf) {
     return (
@@ -161,28 +159,28 @@ const SignedProformaInvoices = () => {
           <thead className="th_style">
             <tr>
               <th scope="col">
-                <div >#</div>
+                <div>#</div>
               </th>
               <th scope="col">
-                <div >Employee</div>
+                <div>Employee</div>
               </th>
               <th scope="col">
-                <div >Approved by</div>
+                <div>Approved by</div>
               </th>
               <th scope="col">
-                <div >Date/Time</div>
+                <div>Date/Time</div>
               </th>
               <th scope="col">
-                <div >Customer</div>
+                <div>Customer</div>
               </th>
               <th scope="col">
-                <div >Signed by Customer</div>
+                <div>Signed by Customer</div>
               </th>
               {/* <th scope="col">
                 <div >Action</div>
               </th> */}
               <th scope="col">
-                <div >Progress</div>
+                <div>Progress</div>
               </th>
             </tr>
           </thead>

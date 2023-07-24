@@ -58,18 +58,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const InvoiceTerms = ({
-  terms,
-  paymentPercentage,
-  deliveryDate,
-  documentCharges,
-  note,
-}) => {
+const InvoiceTerms = ({ terms, paymentPercentage, deliveryDate, documentCharges, note }) => {
   if (!documentCharges) {
     documentCharges = 0;
   }
-  console.log(deliveryDate);
-  console.log(terms[0]);
   let allTerms = terms_collections.filter((coll) => {
     return coll.collection === terms[0];
   })[0].terms;
@@ -85,8 +77,6 @@ const InvoiceTerms = ({
     allTerms.push(documentCharges_term);
   }, []);
   const allTermsUnique = [...new Set(allTerms)];
-
-  console.log(allTerms);
 
   return (
     <View wrap={true}>

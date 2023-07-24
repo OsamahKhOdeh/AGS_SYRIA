@@ -8,11 +8,8 @@ import { setPiEmployee, setPiProudcts } from "../../../../store/piSlice";
 import useAuth from "../../../../hooks/useAuth";
 
 const ProformaInvoice = ({ adminPi }) => {
-  console.log(adminPi);
-  console.log("🚀 ~ file: ProformaInvoice.jsx:13 ~ ProformaInvoice ~ adminPi:", adminPi.pi_no);
   const cart = useSelector((state) => state.cart.cart);
   const { username, status, phone } = useAuth();
-  console.log({ username, status, phone });
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setPiProudcts(cart));
@@ -55,9 +52,7 @@ const ProformaInvoice = ({ adminPi }) => {
       },
       isPi: true,
     };
-    console.log(newPi);
   }
-  console.log();
 
   return (
     <div style={{ width: "100%" }}>

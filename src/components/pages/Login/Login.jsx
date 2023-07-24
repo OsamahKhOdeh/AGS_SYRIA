@@ -46,7 +46,6 @@ export const Login = () => {
         username: usernameD.current.value,
         password: psswdD.current.value,
       };
-      console.log(formData);
       // console.log({ username: username, psswd: psswd });
       dispatch(login(formData, navigate));
     } catch (error) {}

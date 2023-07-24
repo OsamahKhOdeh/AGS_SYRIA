@@ -70,14 +70,7 @@ function NewBL({ id, property, productCode, brand, capacity }) {
             <div className="container_val_x">
               <div className="header_div">Qty</div>
               <div className="value_div">
-                <input
-                  value={qty}
-                  onChange={(e) => setQty(e.target.value)}
-                  className="bl_val_input bl_qty"
-                  type="number"
-                  autocomplete="on"
-                  step="any"
-                ></input>{" "}
+                <input value={qty} onChange={(e) => setQty(e.target.value)} className="bl_val_input bl_qty" type="number" autocomplete="on" step="any"></input>{" "}
               </div>
             </div>
 
@@ -119,20 +112,12 @@ function NewBL({ id, property, productCode, brand, capacity }) {
             <div className="column_div">
               <div className="header_div">BL/Code</div>
               <div className="value_div">
-                <input
-                  value={blCode}
-                  onChange={(e) => setBlCode(e.target.value)}
-                  autocomplete="on"
-                  className="bl_val_input"
-                  type="text"
-                ></input>{" "}
+                <input value={blCode} onChange={(e) => setBlCode(e.target.value)} autocomplete="on" className="bl_val_input" type="text"></input>{" "}
               </div>
             </div>
           )}{" "}
           <div className="column_div">
-            <div className="header_div">
-              {property === "coming" ? "Expected arrival BL/Date" : property === "production" ? "Ex/Prod Finish Date" : "BL/Date"}
-            </div>
+            <div className="header_div">{property === "coming" ? "Expected arrival BL/Date" : property === "production" ? "Ex/Prod Finish Date" : "BL/Date"}</div>
             <div className="value_div">
               <DatePicker showIcon selected={blDate} onChange={(date) => setBlDate(date)} />{" "}
             </div>
@@ -164,7 +149,6 @@ function ProductWareHouseBlQty(props) {
     setQty(props.property !== "booked" ? props.bl.blAvailableQty : props.bl.blBookedQty);
   }, [props.bl.blAvailableQty, props.bl.blBookedQty, props.property]);
   const handleQtyChange = async () => {
-    console.log(props.bl);
     await props.handleQtyChange({
       qty: qty,
       code: props.bl.bl,
@@ -174,7 +158,6 @@ function ProductWareHouseBlQty(props) {
     });
     //  setQty(props.property !== "booked" ? props.bl?.qty - props.bl?.booked : props.bl?.booked);
   };
-  console.log(props.bl.date);
 
   return (
     <div className="warehouse_bl_item">
@@ -188,12 +171,9 @@ function ProductWareHouseBlQty(props) {
           type="number"
           step="any"
           value={qty}
-          onChange={(e) =>
-            {
-              setQty(e.target.value);
-             console.log(qty);
-            }
-          }
+          onChange={(e) => {
+            setQty(e.target.value);
+          }}
           onBlur={handleQtyChange}
           // disabled={
           //   (props.warehouse === "coming" && props?.td === "coming") || (props.warehouse === "production" && props?.td === "production")
@@ -224,8 +204,6 @@ function ProductWareHouseBl(props) {
   // }, [props.item.bl]);
 
   const handleQtyChange = (value) => {
-    console.log(props.item);
-    console.log({ ...value, warehouse: props.item?.warehouse });
     props.handleWarhouseBlQtyChange({ ...value, warehouse: props.item?.warehouse });
   };
   return (
@@ -237,27 +215,25 @@ function ProductWareHouseBl(props) {
         }}
       >
         {" "}
-        <span>
-          {props.item?.warehouse} 
-        </span>
+        <span>{props.item?.warehouse}</span>
         <span>({props.property === "booked" ? warehouseBookedQty : props.item?.warehouseAvailableQty})</span>
       </div>
       {/* {showBls && ( */}
-        <>
-          {props.item?.warehouseBLs?.map((bl, index) => {
-            return (
-              <ProductWareHouseBlQty
-                id={props.id}
-                warehouse={bl.warehouse}
-                property={props.property}
-                td={props.td}
-                key={index}
-                bl={bl}
-                handleQtyChange={handleQtyChange}
-              ></ProductWareHouseBlQty>
-            );
-          })}
-        </>
+      <>
+        {props.item?.warehouseBLs?.map((bl, index) => {
+          return (
+            <ProductWareHouseBlQty
+              id={props.id}
+              warehouse={bl.warehouse}
+              property={props.property}
+              td={props.td}
+              key={index}
+              bl={bl}
+              handleQtyChange={handleQtyChange}
+            ></ProductWareHouseBlQty>
+          );
+        })}
+      </>
       {/* )} */}
     </div>
   );
@@ -323,7 +299,6 @@ function ProductRow(props) {
   };
   const dispatch = useDispatch();
   const handleProductWarhouseBlQtyChange = async (value) => {
-    console.log(value);
     if (value.property !== "booked") {
       await dispatch(updateProductWarehouseBlQty(props.item.productId, parseInt(value.qty)));
     } else {
@@ -387,7 +362,7 @@ function ProductRow(props) {
       )}
       {selectedOptions.includes("code") && (
         <td>
-          <div >
+          <div>
             {props.item?.code}/{props.item?.capacity}
           </div>
         </td>
@@ -404,33 +379,21 @@ function ProductRow(props) {
       {/* ------------------------------- td Availabe ------------------------------ */}
       {selectedOptions.includes("available") && (
         <td>
-          <div >
+          <div>
             <>
               <div className="total_stock_div available_color" onClick={handleTotalStockClick}>
                 {props.item?.productAvailableQty}
               </div>
               {/*            <StockInput updateKey={props.updateKey} property={"stock"} id={props.item._id} stock={props.item?.stock}></StockInput>
                */}{" "}
-              <NewBL
-                id={props.item.productId}
-                property="available"
-                productCode={props.item.code}
-                brand={props.item.brand}
-                capacity={props.item.capacity}
-              ></NewBL>
+              <NewBL id={props.item.productId} property="available" productCode={props.item.code} brand={props.item.brand} capacity={props.item.capacity}></NewBL>
               {/* {showStockDetails && ( */}
-                <div className="warehouses">
-                  {props.item?.productWarehouseQuantities &&
-                    props.item?.productWarehouseQuantities.map((item, index) => {
-                      return (
-                        <ProductWareHouseBl
-                          key={index}
-                          item={item}
-                          handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}
-                        ></ProductWareHouseBl>
-                      );
-                    })}
-                </div>
+              <div className="warehouses">
+                {props.item?.productWarehouseQuantities &&
+                  props.item?.productWarehouseQuantities.map((item, index) => {
+                    return <ProductWareHouseBl key={index} item={item} handleWarhouseBlQtyChange={handleProductWarhouseBlQtyChange}></ProductWareHouseBl>;
+                  })}
+              </div>
               {/* )} */}
             </>
           </div>
@@ -523,7 +486,6 @@ const EditStock2 = () => {
   if (filter.length > 0 && searchQuery.length > 0) {
     if (filter === "bl-code") {
       products = products.filter((item) => item.bl.some((bl) => bl.code.includes(searchQuery.toLowerCase())));
-      console.log(products);
     } else if (filter === "warehouse") {
       products = products.filter((item) => item.bl.some((bl) => bl.warehouse.includes(searchQuery.toLowerCase())));
     } else {
@@ -576,25 +538,23 @@ const EditStock2 = () => {
   const handleSetFilteredProducts = (prods) => {
     setShowFiltered(true);
     setFilteredProducts(prods);
-    console.log(prods);
   };
 
   return (
     <div style={{ width: "98%", margin: "auto" }}>
       <div className="search_container">
-            <div className="search__list">
-                <div className="change__ Edit-stock" >
-                  <div className="row">
-                    <div className="col-lg-6 col-md-12">
-                  
-                      <SearchBox onChange={handleSearchQueryChange}></SearchBox>
-                    </div>
-                    <div className="col-lg-6 col-md-12">
-                     <DropDownSelect onChange={handleFilterChange} options={options} />
-                    </div>
-                  </div>
-                </div>
+        <div className="search__list">
+          <div className="change__ Edit-stock">
+            <div className="row">
+              <div className="col-lg-6 col-md-12">
+                <SearchBox onChange={handleSearchQueryChange}></SearchBox>
               </div>
+              <div className="col-lg-6 col-md-12">
+                <DropDownSelect onChange={handleFilterChange} options={options} />
+              </div>
+            </div>
+          </div>
+        </div>
         {/* <SearchBox onChange={handleSearchQueryChange}></SearchBox>
         <DropDownSelect onChange={handleFilterChange} options={options} /> */}
         {/* <div onClick={() => openModal()}>Advanced Search</div>
@@ -617,19 +577,19 @@ const EditStock2 = () => {
         <thead className="th_style">
           <tr>
             {selectedOptions.includes("image") && (
-              <th  scope="col">
+              <th scope="col">
                 <div>Image</div>
               </th>
             )}
 
             {selectedOptions.includes("brand") && (
               <th scope="col">
-                <div >Brand</div>
+                <div>Brand</div>
               </th>
             )}
             {selectedOptions.includes("code") && (
               <th scope="col">
-                <div >Code</div>
+                <div>Code</div>
               </th>
             )}
 
@@ -639,8 +599,8 @@ const EditStock2 = () => {
               </th>
             )} */}
             {selectedOptions.includes("available") && (
-              <th   scope="col">
-                <div  >Available</div>
+              <th scope="col">
+                <div>Available</div>
               </th>
             )}
 
@@ -649,7 +609,7 @@ const EditStock2 = () => {
                 <div  >Booked</div>
               </th>
             )} */}
-{/* 
+            {/* 
             {selectedOptions.includes("update") && (
               <th   scope="col">
                 <div  > Last Upadte(by)</div>
@@ -659,12 +619,8 @@ const EditStock2 = () => {
         </thead>
         <tbody>
           {!showFiltered
-            ? products?.map((item, index) => (
-                <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>
-              ))
-            : filteredProducts.map((item, index) => (
-                <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>
-              ))}
+            ? products?.map((item, index) => <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>)
+            : filteredProducts.map((item, index) => <ProductRow selectedOptions={selectedOptions} key={index} updateKey={updateKey} item={item} index={index}></ProductRow>)}
         </tbody>
       </table>
     </div>

@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
 });
 
 const InvoiceTableRow = ({ products, currency, location, usdToAedRate }) => {
-  console.log({ products, currency, location, usdToAedRate });
   function calcPrice(item) {
     let price = 0;
     if (location === "freezone" && currency === "AED") {

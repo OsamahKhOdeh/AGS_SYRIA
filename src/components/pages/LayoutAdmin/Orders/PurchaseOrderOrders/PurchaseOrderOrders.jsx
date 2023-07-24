@@ -50,7 +50,6 @@ const PurchaseOrderOrders = () => {
   const handlePDF = (pi) => {
     setCurrentPo(pi);
     setIsPdf(true);
-    console.log(isPdf);
   };
   if (isPdf) {
     return (
@@ -62,7 +61,7 @@ const PurchaseOrderOrders = () => {
               setIsPdf(false);
             }}
           >
-             Back
+            Back
           </button>
         </div>
         <PurchaseOrderPdf po={currentPo} />
@@ -86,29 +85,29 @@ const PurchaseOrderOrders = () => {
           <thead>
             <tr className="th_style">
               <th scope="col">
-                <div >#</div>
+                <div>#</div>
               </th>
               <th scope="col">
-                <div >Employee</div>
+                <div>Employee</div>
               </th>
               <th scope="col">
-                <div >Exporter</div>
+                <div>Exporter</div>
               </th>
               <th scope="col">
-                <div >Customer</div>
+                <div>Customer</div>
               </th>
               <th scope="col">
-                <div >Date/Time</div>
+                <div>Date/Time</div>
               </th>
 
               <th scope="col">
-                <div >From manager</div>
+                <div>From manager</div>
               </th>
               <th scope="col">
-                <div >Signed by Customer</div>
+                <div>Signed by Customer</div>
               </th>
               <th scope="col">
-                <div >Status</div>
+                <div>Status</div>
               </th>
             </tr>
           </thead>
@@ -141,7 +140,7 @@ const PurchaseOrderOrders = () => {
                         </button>
                       ) : item.status === "Rejected" ? (
                         <>
-                          <p >{"Rejected"}</p>
+                          <p>{"Rejected"}</p>
                         </>
                       ) : (
                         "Waiting for manager approval"

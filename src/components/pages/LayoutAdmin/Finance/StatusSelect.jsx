@@ -12,29 +12,19 @@ const StatusSelect = ({ pi }) => {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    dispatch(
-      changeSignedProformaInvoiceStatus({ id: pi.pi_id, status: value })
-    );
-    dispatch(
-      updateSignedProformaInvoiceStatus({ id: pi.pi_id, status: value })
-    );
+    dispatch(changeSignedProformaInvoiceStatus({ id: pi.pi_id, status: value }));
+    dispatch(updateSignedProformaInvoiceStatus({ id: pi.pi_id, status: value }));
     //setInputs(values => ({...values, [name]: value}))
   };
 
   const handleNextStage = () => {
-    console.log("ggg");
     dispatch(updateSignedProformaInvoiceStatus({ id: pi.pi_id }));
     dispatch(changeSignedProformaInvoiceStatus({ id: pi.pi_id }));
   };
 
   return (
     <>
-      <select
-        className="select____status__class "
-        id="exporter"
-        name="exporter"
-        onChange={handleChange}
-      >
+      <select className="select____status__class " id="exporter" name="exporter" onChange={handleChange}>
         {orderStatusFinance.map((status) => (
           <option value={status.status}>{status.status}</option>
         ))}
